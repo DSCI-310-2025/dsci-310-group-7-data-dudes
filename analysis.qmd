@@ -1,0 +1,64 @@
+---
+title: "Age, Drugs, and Mental Health: A Predictive Analysis"
+author: "Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos"
+format: html
+---
+
+# Dataset
+
+This document explores predictive modeling using data from the National Survey on Drug Use and Health.
+
+## Predictive Question
+
+**Can we predict the presence or severity of mental illness based on the age of first use of substances?**
+ Note: "First use" refers to the non-medical use of substances, meaning use without a prescription, and taken for the experience or feeling it caused.
+
+- **Independent Variables**
+    - `HERAGE`: AGE WHEN FIRST USED HEROIN
+    - `LSDAGE`: AGE WHEN FIRST USED LSD
+    - `PCPAGE`: AGE WHEN FIRST USED PCP
+    - `CRKAGE`:
+    - `ECSAGE`:
+    - `COCAGE`:
+    - `SNUFTRY`:
+    - `INHAGE`:
+    - `CHEWTRY`:
+    - `MTHAAGE`:
+    - `HALLAGE`:
+    - `OXYCAGE`:
+    - `SEDAGE`:
+    - `STIMAGE`:
+    - `ANALAGE`:
+    - `TRANAGE`:
+    - `MJAGE`:
+    - `SLTTRY`:
+
+- **Dependent Variable**
+    - `LMIYR_U`: Mild (Low) Mental Illness (LMI)
+    - `MMIYR_U`: Moderate Mental Illness (MMI)
+    - `SMIYR_U`: Serious Mental Illness (SMI) 
+    - `AMIYR_U`: Any Mental Illness (AMI)
+    
+
+## Data Summary
+
+TODO: add some EDA
+
+```{r, echo = FALSE}
+#load("data/data.rda") # Load dataset
+
+#data <- da35509.0001 # Assigning loaded data to 'data'
+
+#summary(data) # Display summary statistics
+```
+
+## Data Cleaning
+
+1. Handle missing values by removing rows with excessive missing data or imputing reasonable values.
+2. Check format of variable and transform as needed.
+3. Check for outliers in age-related variables.
+4. Standardize or normalize predictor variables as needed.
+
+## Analysis
+
+Use linear regression, blah blah blah. Perform correlation analysis to identify significant predictors before modeling. Evaluate model performance using accuracy or RMSE.

@@ -1,43 +1,33 @@
 ---
-title: "Age, Drugs, and Mental Health: A Predictive Analysis"
+title: "Early Substance Use and Hard Drug Behaviors: A Predictive Analysis"
 author: "Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos"
 format: html
 ---
 
 # Dataset
+This dataset is sourced from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), which is derived from from the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3), conducted by the United States Department of Health and Human Services, Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality.
 
-This document explores predictive modeling using data from the National Survey on Drug Use and Health.
+The dataset covers self-reported drug use trends across 17 age groups in the United States, examining 13 different substances.
+
+**Disclaimer:** This analysis is distinct from the FiveThirtyEight article [How Baby Boomers Get High](https://fivethirtyeight.com/features/how-baby-boomers-get-high/). Our study focuses on a different research question, examining whether adolescent alcohol and marijuana use (ages 12-19) can predict hard substance use in early adulthood (ages 20-29) using predictive modeling.
 
 ## Predictive Question
 
-**Can we predict the presence or severity of mental illness based on the age of first use of substances?**
- Note: "First use" refers to the non-medical use of substances, meaning use without a prescription, and taken for the experience or feeling it caused.
+**Can patterns of alcohol and marijuana use in early adolescence predict hard substance use behaviors in early adulthood (ages 20-29)?**
 
-- **Independent Variables**
-    - `HERAGE`: AGE WHEN FIRST USED HEROIN
-    - `LSDAGE`: AGE WHEN FIRST USED LSD
-    - `PCPAGE`: AGE WHEN FIRST USED PCP
-    - `CRKAGE`:
-    - `ECSAGE`:
-    - `COCAGE`:
-    - `SNUFTRY`:
-    - `INHAGE`:
-    - `CHEWTRY`:
-    - `MTHAAGE`:
-    - `HALLAGE`:
-    - `OXYCAGE`:
-    - `SEDAGE`:
-    - `STIMAGE`:
-    - `ANALAGE`:
-    - `TRANAGE`:
-    - `MJAGE`:
-    - `SLTTRY`:
+- Independent Variables (Ages 12-19)
+    - `alcohol-use`
+    - `alcohol-frequency`
+    - `marijuana-use`
+    - `marijuana-frequency`
 
-- **Dependent Variable**
-    - `LMIYR_U`: Mild (Low) Mental Illness (LMI)
-    - `MMIYR_U`: Moderate Mental Illness (MMI)
-    - `SMIYR_U`: Serious Mental Illness (SMI) 
-    - `AMIYR_U`: Any Mental Illness (AMI)
+- Dependent Variables (Ages 20-29)
+    - `cocaine-use`
+    - `cocaine-frequency`
+    - `heroin-use`
+    - `heroin-frequency`
+    - `meth-use`
+    - `meth-frequency`
     
 
 ## Data Summary

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos">
 
-<title>Age, Drugs, and Mental Health: A Predictive Analysis</title>
+<title>Early Substance Use and Hard Drug Behaviors: A Predictive Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Age, Drugs, and Mental Health: A Predictive Analysis</h1>
+<h1 class="title">Early Substance Use and Hard Drug Behaviors: A Predictive Analysis</h1>
 </div>
 
 
@@ -71,38 +71,28 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="dataset" class="level1">
 <h1>Dataset</h1>
-<p>This document explores predictive modeling using data from the National Survey on Drug Use and Health.</p>
+<p>This dataset is sourced from <a href="https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age">FiveThirtyEight’s repository</a>, which is derived from from the <a href="https://doi.org/10.3886/ICPSR35509.v3">2013 National Survey on Drug Use and Health</a>, conducted by the United States Department of Health and Human Services, Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality.</p>
+<p>The dataset covers self-reported drug use trends across 17 age groups in the United States, examining 13 different substances.</p>
+<p><strong>Disclaimer:</strong> This analysis is distinct from the FiveThirtyEight article <a href="https://fivethirtyeight.com/features/how-baby-boomers-get-high/">How Baby Boomers Get High</a>. Our study focuses on a different research question, examining whether adolescent alcohol and marijuana use (ages 12-19) can predict hard substance use in early adulthood (ages 20-29) using predictive modeling.</p>
 <section id="predictive-question" class="level2">
 <h2 class="anchored" data-anchor-id="predictive-question">Predictive Question</h2>
-<p><strong>Can we predict the presence or severity of mental illness based on the age of first use of substances?</strong> Note: “First use” refers to the non-medical use of substances, meaning use without a prescription, and taken for the experience or feeling it caused.</p>
+<p><strong>Can patterns of alcohol and marijuana use in early adolescence predict hard substance use behaviors in early adulthood (ages 20-29)?</strong></p>
 <ul>
-<li><strong>Independent Variables</strong>
+<li>Independent Variables (Ages 12-19)
 <ul>
-<li><code>HERAGE</code>: AGE WHEN FIRST USED HEROIN</li>
-<li><code>LSDAGE</code>: AGE WHEN FIRST USED LSD</li>
-<li><code>PCPAGE</code>: AGE WHEN FIRST USED PCP</li>
-<li><code>CRKAGE</code>:</li>
-<li><code>ECSAGE</code>:</li>
-<li><code>COCAGE</code>:</li>
-<li><code>SNUFTRY</code>:</li>
-<li><code>INHAGE</code>:</li>
-<li><code>CHEWTRY</code>:</li>
-<li><code>MTHAAGE</code>:</li>
-<li><code>HALLAGE</code>:</li>
-<li><code>OXYCAGE</code>:</li>
-<li><code>SEDAGE</code>:</li>
-<li><code>STIMAGE</code>:</li>
-<li><code>ANALAGE</code>:</li>
-<li><code>TRANAGE</code>:</li>
-<li><code>MJAGE</code>:</li>
-<li><code>SLTTRY</code>:</li>
+<li><code>alcohol-use</code></li>
+<li><code>alcohol-frequency</code></li>
+<li><code>marijuana-use</code></li>
+<li><code>marijuana-frequency</code></li>
 </ul></li>
-<li><strong>Dependent Variable</strong>
+<li>Dependent Variables (Ages 20-29)
 <ul>
-<li><code>LMIYR_U</code>: Mild (Low) Mental Illness (LMI)</li>
-<li><code>MMIYR_U</code>: Moderate Mental Illness (MMI)</li>
-<li><code>SMIYR_U</code>: Serious Mental Illness (SMI)</li>
-<li><code>AMIYR_U</code>: Any Mental Illness (AMI)</li>
+<li><code>cocaine-use</code></li>
+<li><code>cocaine-frequency</code></li>
+<li><code>heroin-use</code></li>
+<li><code>heroin-frequency</code></li>
+<li><code>meth-use</code></li>
+<li><code>meth-frequency</code></li>
 </ul></li>
 </ul>
 </section>

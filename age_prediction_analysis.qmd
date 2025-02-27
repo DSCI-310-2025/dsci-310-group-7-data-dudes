@@ -20,7 +20,7 @@ library(tidyverse)
 
 (heidi will enter information here)
 
-# Introduction:
+# Introduction
 
 * provide some relevant background information on the topic so that someone unfamiliar with it will be prepared to understand the rest of your report
 * clearly state the question you tried to answer with your project
@@ -37,7 +37,7 @@ Predictive Question
 **Can patterns of alcohol and marijuana use in early adolescence predict hard substance use behaviors in early adulthood (ages 20-29)?**
 
 
-# Methods & Results:
+# Methods & Results
 
 (will be done by Jessica and Jade)
 
@@ -51,19 +51,23 @@ Predictive Question
   * creates a visualization of the result of the analysis
 * note: all tables and figure should have a figure/table number and a legend
 
-### Data Cleaning
+### Read Data
 
-1. Handle missing values by removing rows with excessive missing data or imputing reasonable values.
-2. Check format of variable and transform as needed.
-3. Check for outliers in age-related variables.
-4. Standardize or normalize predictor variables as needed.
+Here, we read in the data downloaded using `01-download-dataset.R` and cleaned using `02-data-cleaning.R`.
 
 ```{r}
-#| eval: false # dont have the data set up properly in the repo yet
 # read in the data
-data <- read.csv("data/drug-use-by-age.csv")
-
+data <- read.csv("data/drug-use-by-age-cleaned.csv")
 ```
+
+### Data Cleaning
+
+The dataset underwent the following preprocessing steps in `02-data-cleaning.R`.
+
+1. Replaced missing values: Instances of "-" in character columns were converted to NA to handle missing data appropriately.
+2. Converted character columns to numeric: After replacing "-" with NA, all character columns were coerced into numeric format, introducing NAs where conversion was not possible.
+3.Checked for outliers in age-related variables: [TODO]
+4. Standardized or normalized predictor variables: [TODO]
 
 ### EDA
 

@@ -159,8 +159,8 @@ We can do the same for consumption of marijuana in the past 12 months:
 
 plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) + 
   geom_bar(stat = "identity") + 
-  geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Proportion of alcohol consumption in past 12 months by age group") +
+  geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+  labs(title="Proportion of marijuana consumption in past 12 months by age group") +
   xlab("age group") +
   ylab("proportion of respondents (%)") +
   ylim(0, 100) +

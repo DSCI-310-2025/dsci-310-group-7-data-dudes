@@ -1,8 +1,6 @@
-# dsci-310-group-7-data-dudes
-
-## Project Title: Early Substance Use and Hard Drug Behaviors: A Predictive Analysis
-### Contributors: Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos
-
+# Project Title: Early Substance Use and Hard Drug Behaviors: A Predictive Analysis
+Contributors: Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos
+<br><br>
 ## Summary:
 TODO
 

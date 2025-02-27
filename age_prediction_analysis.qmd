@@ -136,7 +136,7 @@ data <- read.csv("data/drug-use-by-age.csv")
 ### EDA
 
 Since we want to investigate whether substance use in adolescence can predict substance use later in life,
-we can first observe how many times the average person in each age group had consumed alcohol in the past 12 months:
+we can first observe the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
 ```{r}
 #| echo: false

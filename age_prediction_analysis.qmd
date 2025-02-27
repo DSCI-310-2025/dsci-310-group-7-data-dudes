@@ -1,10 +1,11 @@
 ---
-title: "Comparing Drug Use Between Age Groups: A Predictive Analysis"
-author: "Group 7: Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos"
+title: "DSCI 310 Project Group 7"
+author: "Jade Chen, Jessica Luo, Heidi Lantz, and Nazia Edroos"
 format: pdf
 toc: true
 toc-title: Outline
 toc-location: body
+bibliography: references.bib
 ---
 
 \newpage
@@ -15,27 +16,89 @@ library(tidyverse)
 # put any other packages used here!
 ```
 
+# Predicting Age from Drug Use Patterns: A Statistical Analysis
 
 # Summary
 
-(heidi will enter information here)
+This study explores the relationship between drug use and age, aiming to determine whether a person's reported substance use can serve as a reliable predictor of their age.
+Using the "Drug Use by Age" dataset from FiveThirtyEight, which compiles data from the National Survey on Drug Use and Health [@538_drug_use], we employ statistical techniques to analyze the relationship between age and substance use. 
+The dataset contains information about a given age group, and summary info about the percentage of people who have done a drug and the median frequency it is used at. 
+There is information on a wide variety of drugs, including alcohol, marijuana, various illicit drugs, and more.
+We apply feature selection and predictive modeling to assess the strength of this relationship.
+Our findings contribute to understanding how drug use behaviors vary across different age groups and the potential for age prediction in public health and policy contexts.
+
+(add more about the findings at the end)
+
+---
 
 # Introduction:
 
-* provide some relevant background information on the topic so that someone unfamiliar with it will be prepared to understand the rest of your report
-* clearly state the question you tried to answer with your project
-* identify and describe the dataset that was used to answer the question
+### Background and Research Question
 
-This dataset is sourced from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), which is derived from from the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3), conducted by the United States Department of Health and Human Services, Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality.
+Age can greatly influence many aspects of how we behave and what decisions we make, especially regarding substance use.
+Patterns of drug consumption change over time in a person’s life, reflecting their social, biological, and environmental influences.
+Research indicates that substance use disorders, including those related to alcohol, tobacco, cannabis, and opioids, generally decrease with age [@drug_use_patterns].
+Younger individuals often engage in higher rates of substance experimentation, while older adults tend to exhibit more stable or declining usage patterns. 
+Understanding these age-related trends is essential for developing effective public health strategies, addiction prevention programs,  and targeted interventions.
+
+In this study, we investigate whether a person’s reported drug use can serve as a predictor of their age [@538_drug_use]. 
+Previous research has highlighted the progression and predictors of substance use across the lifespan. 
+For instance, studies have identified that early initiation of substance use is associated with an increased risk of developing substance use disorders later in life [@childhood_predictors]. 
+Furthermore, patterns observed during adolescence are often associated with continued use or potential abuse in adulthood [@adolescent_vs_adult_predictors].
+This tells us that finding out which age groups are using which drugs can be useful information for addressing and preventing issues like this.
+Moreover, life-course patterns of substance abuse reveal that older adults with substance misuse issues often reflect on their usage patterns, providing insights into the development and persistence of these behaviors over time [@life_patterns_substance_abuse]. 
+Recognizing these patterns across different age groups can inform the creation of age-specific prevention and treatment programs.
+By assessing the strength of the relationship between age and drug use behaviors, our analysis contributes to discussions on behavioral health and its implications.
+
+**This leads us to our Research Question:**
+
+* *Can we accurately predict an individual's age based only on their reported patterns of substance use?*
+
+
+### About the Data
+
+To address our research question, we utilize the "Drug Use by Age" dataset sourced from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), 
+which is derived from from the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3).
+This study was conducted by the United States Department of Health and Human Services, Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality.
 
 The dataset covers self-reported drug use trends across 17 age groups in the United States, examining 13 different substances.
+The dataset includes both legal substances, such as alcohol and marijuana, and illicit drugs, offering a broad perspective on substance use trends for each age group.
 
-**Disclaimer:** This analysis is distinct from the FiveThirtyEight article [How Baby Boomers Get High](https://fivethirtyeight.com/features/how-baby-boomers-get-high/). Our study focuses on a different research question, examining whether adolescent alcohol and marijuana use (ages 12-19) can predict hard substance use in early adulthood (ages 20-29) using predictive modeling.
+Below is a summary of the variables included in the dataset:
 
-Predictive Question
+| Variable Name           | Description                                                                 |
+|-------------------------|----------------------------------------------------------------------|
+| `age`                   | Age group of respondents (e.g., 12, '22-23', '35-49', '65+' etc.).                     |
+| `n`                     | Number of people surveyed in each age group.                                 |
+| `alcohol_use`           | Percentage of respondents who used alcohol in the past 12 months.            |
+| `alcohol_frequency`     | Median number of times alcohol was used in the past 12 months.               |
+| `marijuana_use`         | Percentage who used marijuana in the past 12 months.                         |
+| `marijuana_frequency`   | Median number of times marijuana was used in the past 12 months.             |
+| `cocaine_use`           | Percentage who used cocaine in the past 12 months.                           |
+| `cocaine_frequency`     | Median number of times cocaine was used in the past 12 months.               |
+| `crack_use`             | Percentage who used crack in the past 12 months.                             |
+| `crack_frequency`       | Median number of times crack was used in the past 12 months.                 |
+| `heroin_use`            | Percentage who used heroin in the past 12 months.                            |
+| `heroin_frequency`      | Median number of times heroin was used in the past 12 months.                |
+| `hallucinogen_use`      | Percentage who used hallucinogens in the past 12 months.                     |
+| `hallucinogen_frequency`| Median number of times hallucinogens were used in the past 12 months.        |
+| `inhalant_use`          | Percentage who used inhalants in the past 12 months.                         |
+| `inhalant_frequency`    | Median number of times inhalants were used in the past 12 months.            |
+| `pain_reliever_use`     | Percentage who used pain relievers in the past 12 months.                    |
+| `pain_reliever_frequency`| Median number of times pain relievers were used in the past 12 months.      |
+| `oxycontin_use`         | Percentage who used OxyContin in the past 12 months.                         |
+| `oxycontin_frequency`   | Median number of times OxyContin was used in the past 12 months.             |
+| `tranquilizer_use`      | Percentage who used tranquilizers in the past 12 months.                     |
+| `tranquilizer_frequency`| Median number of times tranquilizers were used in the past 12 months.        |
+| `stimulant_use`         | Percentage who used stimulants in the past 12 months.                        |
+| `stimulant_frequency`   | Median number of times stimulants were used in the past 12 months.           |
+| `meth_use`              | Percentage who used methamphetamine in the past 12 months.                   |
+| `meth_frequency`        | Median number of times methamphetamine was used in the past 12 months.       |
+| `sedative_use`          | Percentage who used sedatives in the past 12 months.                         |
+| `sedative_frequency`    | Median number of times sedatives were used in the past 12 months.            |
 
-**Can patterns of alcohol and marijuana use in early adolescence predict hard substance use behaviors in early adulthood (ages 20-29)?**
 
+---
 
 # Methods & Results:
 
@@ -59,7 +122,7 @@ Predictive Question
 4. Standardize or normalize predictor variables as needed.
 
 ```{r}
-#| eval: false # dont have the data set up properly in the repo yet
+#| include: false
 # read in the data
 data <- read.csv("data/drug-use-by-age.csv")
 
@@ -120,7 +183,4 @@ discuss what impact could such findings have?
 discuss what future questions could this lead to?
 
 
-# References:
-
-at least 4 citations relevant to the project.
-(heidi will insert this)
+# References

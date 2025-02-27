@@ -67,13 +67,31 @@ data <- read.csv("data/drug-use-by-age.csv")
 
 ### EDA
 
-```{r}
-#| echo: false
+Since we want to investigate whether substance use in adolescence can predict substance use later in life, we can firstly observe how many times the average person in each age group had consumed alcohol in the past 12 months:
 
-# put some eda here
+```{r}
+#| eval: false # dont have the data set up properly in the repo yet
+
+age = data$age
+alc = data$alcohol-use
+
+plot(age, alc)
+
 ```
 
-Talk about EDA yada yada.
+We can do the same for consumption of marijuana in the past 12 months:
+
+```{r}
+#| eval: false # dont have the data set up properly in the repo yet
+
+mari = data$marijuana-use
+
+plot(age, mari)
+
+```
+
+(will do more when we know that the data can be loaded properly in analysis file  -naz)
+
 
 ### Analysis
 

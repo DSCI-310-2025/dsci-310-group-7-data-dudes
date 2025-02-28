@@ -10,15 +10,6 @@ bibliography: references.bib
 
 \newpage
 
-```{r}
-#| include: false
-library(tidyverse)
-library(readr)
-library(rsample)
-library(tidymodels)
-# put any other packages used here!
-```
-
 # Predicting Age from Drug Use Patterns: A Statistical Analysis
 
 ## Summary

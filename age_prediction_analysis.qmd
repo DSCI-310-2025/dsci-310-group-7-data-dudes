@@ -135,7 +135,8 @@ head(data, n=c(17, 6))
 
 ### EDA
 
-Since we aim to investigate whether substance use during adolescence can predict substance use patterns later in life, we begin by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
+Since we aim to investigate whether substance use during adolescence can predict substance use patterns later in life,
+we begin by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
 ```{r}
 #| echo: false
@@ -167,7 +168,13 @@ plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
 show(plot_mar)
 ```
 
-Both graphs reveal that these substances are commonly used during adolescence. However, while alcohol consumption increases significantly in adulthood, marijuana use tends to plateau in early adulthood. To further explore the use of harder substances, such as heroin, crack and hallucinogens, we shift our focus to the median frequency of use rather than the proportion of users. This is because the proportion of individuals using harder substances is relatively small, making median frequency a more informative metric for understanding usage patterns. For instance, we can plot the distribution of heroin use across different age groups:
+Both graphs reveal that these substances are commonly used during adolescence.
+However, while alcohol consumption increases significantly in adulthood, marijuana use tends to plateau in early adulthood.
+To further explore the use of harder substances, such as heroin, crack and hallucinogens,
+we shift our focus to the median frequency of use rather than the proportion of users. 
+This is because the proportion of individuals using harder substances is relatively small, 
+making median frequency a more informative metric for understanding usage patterns.
+For instance, we can plot the distribution of heroin use across different age groups:
 
 
 ```{r}
@@ -190,7 +197,12 @@ plot_her = ggplot(data, aes(x = age, y = heroin.frequency)) +
 show(plot_her)
 ```
 
-The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance. Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. By analyzing these patterns, we aim to determine whether an individual’s history of substance use during adolescence can predict their substance use behavior later in life. The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
+The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
+Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
+By analyzing these patterns, we aim to determine whether an individual’s history of substance use during adolescence can predict their substance use behavior later in life. 
+The insights gained from this research could inform prevention programs, 
+helping them design targeted strategies to effectively advocate against drug abuse. 
+This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
 
 ### Analysis

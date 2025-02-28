@@ -47,3 +47,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# rendered pdf of age_prediction_analysis.qmd
+age_prediction_analysis.pdf

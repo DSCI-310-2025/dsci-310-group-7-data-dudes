@@ -3,7 +3,7 @@ Contributors: Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos
 <br><br>
 
 ## Summary:
-Our dataset, obtained from [FiveThirtyEight](https://fivethirtyeight.com/features/college-students-arent-the-only-ones-abusing-adderall/), contains the results of a nationwide survey that collected information about drug use and health. We will use this data to observe whether use of soft drugs (eg: alcohol and marijuana) in adolescence (ages 12-19) can predict frequency of hard drug use (eg: cocaine, heroin, meth) in early adulthood (ages 20-29). [TODO]
+Our dataset, obtained from [FiveThirtyEight](https://fivethirtyeight.com/features/college-students-arent-the-only-ones-abusing-adderall/), contains the results of a nationwide survey that collected information about drug use and health. We will use this data to categorize an individual's age group as Youth (Under 21) or Adult (21 & Over) based on their history of reported substance use. [TODO]
 
 ## How to run our Data Analysis:
 TODO

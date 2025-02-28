@@ -119,39 +119,15 @@ Below is a summary of the variables included in the dataset:
 
 ### Read Data
 
-Here, we read in the data downloaded using `01-download-dataset.R` and cleaned using `02-data-cleaning.R`.
+We downloaded the dataset in `01-download-dataset.R` by retrieving it from a raw GitHub URL and saving it locally in the data/raw directory. 
 
-```{r}
-# read in the data
-data <- read.csv("data/drug-use-by-age-cleaned.csv")
-```
+### Data Cleaning & Transformation
 
-### Data Cleaning
+The dataset underwent the following preprocessing steps in `02-data-clean-transform.R`:
 
-The dataset underwent the following preprocessing steps in `02-data-cleaning.R`.
-
-```{r}
-#| include: false
-# read in the data
-data <- read.csv("data/drug-use-by-age.csv")
-```
-
-Below, we show the dataset in two ways: first using `glimpse()`, and then only the first 6 columns using `head()`.
-
-```{r}
-glimpse(data)
-```
-
-```{r}
-#| echo: false
-# show the first 6 columns of data
-head(data, n=c(18, 6))
-```
-
-1. Replaced missing values: Instances of "-" in character columns were converted to NA to handle missing data appropriately.
-2. Converted character columns to numeric: After replacing "-" with NA, all character columns were coerced into numeric format, introducing NAs where conversion was not possible.
-3.Checked for outliers in age-related variables: [TODO]
-4. Standardized or normalized predictor variables: [TODO]
+1. Replaced missing values: Instances of `-` in character columns were converted to `NA` to handle missing data appropriately.
+2. Converted character columns to numeric: All character columns (except age) were coerced into numeric format, introducing `NA`s where conversion was not possible.
+3. Created a new column, `class`, to classify participants as `youth` or `adult` based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
 
 ### EDA
 Since we aim to predict age category using drug use patterns,

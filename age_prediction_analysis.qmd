@@ -166,6 +166,7 @@ plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
   theme_minimal()
 show(plot_mar)
 ```
+
 Both graphs reveal that these substances are commonly used during adolescence. However, while alcohol consumption increases significantly in adulthood, marijuana use tends to plateau in early adulthood. To further explore the use of harder substances, such as heroin, crack and hallucinogens, we shift our focus to the median frequency of use rather than the proportion of users. This is because the proportion of individuals using harder substances is relatively small, making median frequency a more informative metric for understanding usage patterns. For instance, we can plot the distribution of heroin use across different age groups:
 
 

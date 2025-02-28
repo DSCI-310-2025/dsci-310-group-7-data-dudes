@@ -31,7 +31,7 @@ Our findings contribute to understanding how drug use behaviors vary across diff
 
 ---
 
-# Introduction:
+# Introduction
 
 ### Background and Research Question
 
@@ -100,7 +100,7 @@ Below is a summary of the variables included in the dataset:
 
 ---
 
-# Methods & Results:
+# Methods & Results
 
 (will be done by Jessica and Jade)
 
@@ -114,24 +114,23 @@ Below is a summary of the variables included in the dataset:
   * creates a visualization of the result of the analysis
 * note: all tables and figure should have a figure/table number and a legend
 
+### Read Data
+
+Here, we read in the data downloaded using `01-download-dataset.R` and cleaned using `02-data-cleaning.R`.
+
+```{r}
+# read in the data
+data <- read.csv("data/drug-use-by-age-cleaned.csv")
+```
+
 ### Data Cleaning
 
-1. Handle missing values by removing rows with excessive missing data or imputing reasonable values.
-2. Check format of variable and transform as needed.
-3. Check for outliers in age-related variables.
-4. Standardize or normalize predictor variables as needed.
+The dataset underwent the following preprocessing steps in `02-data-cleaning.R`.
 
-```{r}
-#| include: false
-# read in the data
-data <- read.csv("data/drug-use-by-age.csv")
-```
-
-```{r}
-#| echo: false
-# show the first 6 columns of data
-head(data, n=c(17, 6))
-```
+1. Replaced missing values: Instances of "-" in character columns were converted to NA to handle missing data appropriately.
+2. Converted character columns to numeric: After replacing "-" with NA, all character columns were coerced into numeric format, introducing NAs where conversion was not possible.
+3.Checked for outliers in age-related variables: [TODO]
+4. Standardized or normalized predictor variables: [TODO]
 
 ### EDA
 

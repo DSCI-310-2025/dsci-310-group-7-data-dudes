@@ -13,6 +13,7 @@ bibliography: references.bib
 ```{r}
 #| include: false
 library(tidyverse)
+library(readr)
 library(rsample)
 library(tidymodels)
 # put any other packages used here!
@@ -253,6 +254,11 @@ This is especially critical for younger individuals, who are more susceptible to
 
 ### Analysis
 
+```{r}
+data_clean <- read_csv("data/drug-use-by-age-cleaned.csv")
+```
+
+
 Split into test/training set.
 ```{r}
 data_split <- initial_split(data_clean, prop = 0.80)
@@ -262,20 +268,19 @@ data_test <- testing(data_split)
 
 Since all variables are on the same scale, we do not need to centre any data.
 ```{r}
-# recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
-#                  data = data_train)
-# 
-# knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
-#   set_engine("kknn") %>%
-#   set_mode("classification")
-# 
-## TO DO ##
-# knn_fit <- workflow() %>%
-#   add_recipe(recipe) %>%
-#   add_model(knn_spec) %>%
-#   fit(data = data_train)
-# 
-# knn_fit
+recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
+                 data = data_train)
+
+knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
+  set_engine("kknn") %>%
+  set_mode("classification")
+
+knn_fit <- workflow() %>%
+  add_recipe(recipe) %>%
+  add_model(knn_spec) %>%
+  fit(data = data_train)
+
+knn_fit
 ```
 
 Perform correlation analysis to identify significant predictors before modeling.

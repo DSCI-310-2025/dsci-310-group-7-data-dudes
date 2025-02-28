@@ -6,7 +6,9 @@ Contributors: Jade Chen, Jessica Luo, Heidi Lantz, Nazia Edroos
 Our dataset, obtained from [FiveThirtyEight](https://fivethirtyeight.com/features/college-students-arent-the-only-ones-abusing-adderall/), contains the results of a nationwide survey that collected information about drug use and health. We will use this data to categorize an individual's age group as Youth (Under 21) or Adult (21 & Over) based on their history of reported substance use. [TODO]
 
 ## How to run our Data Analysis:
-TODO
+STILL TODO
+- Mac: docker run --platform=linux/amd64
+- Windows: 
 
 ## Dependencies needed to run our Data Analysis:
 TODO

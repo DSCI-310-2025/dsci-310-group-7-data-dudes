@@ -279,12 +279,8 @@ knn_fit <- workflow() %>%
 knn_fit
 ```
 
-### Results
+### Results: 
 ```{r}
-library(readr)
-library(dplyr)
-library(tidymodels)
-
 # Predict on test data
 predictions <- predict(knn_fit, data_test, type = "class") %>%
   bind_cols(data_test)

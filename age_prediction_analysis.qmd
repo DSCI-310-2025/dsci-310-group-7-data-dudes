@@ -147,24 +147,7 @@ glimpse(data)
 # show the first 6 columns of data
 head(data, n=c(18, 6))
 ```
-We can see there is heterogeneity in column types, with most being `<dbl>` but some as `<chr>`.
-To make this a classification problem, we will create a Class variable, either being Youth (21 & Under) or Adult (22 & Over).
-All other columns should be numeric.
-We don't need `age` or `n` so we will remove these variables.
-```{r}
-data_clean <- data %>%
-  mutate(
-    across(-age, ~ as.numeric(gsub("-", "0", .))),
-    class = ifelse(as.numeric(gsub("\\D", "", age)) < 21, "Youth", "Adult"),
-    class = factor(class)
-  ) %>%
-  select(-age, -n)
-```
 
-**write a little blub here**
-```{r}
-glimpse(data_clean)
-```
 =======
 1. Replaced missing values: Instances of "-" in character columns were converted to NA to handle missing data appropriately.
 2. Converted character columns to numeric: After replacing "-" with NA, all character columns were coerced into numeric format, introducing NAs where conversion was not possible.
@@ -272,9 +255,9 @@ This is especially critical for younger individuals, who are more susceptible to
 
 Split into test/training set.
 ```{r}
-# data_split <- initial_split(data_clean, prop = 0.80)
-# data_train <- training(data_split)
-# data_test <- testing(data_split)
+data_split <- initial_split(data_clean, prop = 0.80)
+data_train <- training(data_split)
+data_test <- testing(data_split)
 ```
 
 Since all variables are on the same scale, we do not need to centre any data.

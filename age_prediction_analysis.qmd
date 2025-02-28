@@ -130,7 +130,6 @@ data <- read.csv("data/drug-use-by-age-cleaned.csv")
 
 The dataset underwent the following preprocessing steps in `02-data-cleaning.R`.
 
-<<<<<<< HEAD
 ```{r}
 #| include: false
 # read in the data
@@ -149,12 +148,10 @@ glimpse(data)
 head(data, n=c(18, 6))
 ```
 
-=======
 1. Replaced missing values: Instances of "-" in character columns were converted to NA to handle missing data appropriately.
 2. Converted character columns to numeric: After replacing "-" with NA, all character columns were coerced into numeric format, introducing NAs where conversion was not possible.
 3.Checked for outliers in age-related variables: [TODO]
 4. Standardized or normalized predictor variables: [TODO]
->>>>>>> c826a73d0e86b72a7ef2a00b1770f8bdb11cf549
 
 ### EDA
 Since we aim to predict age category using drug use patterns,
@@ -254,22 +251,23 @@ This is especially critical for younger individuals, who are more susceptible to
 
 ### Analysis
 
+#### Preparing the data
 ```{r}
 data_clean <- read_csv("data/drug-use-by-age-cleaned.csv")
+data_analysis <- data_clean %>%
+  select(-n, -age)
 ```
-
-
 Split into test/training set.
 ```{r}
-data_split <- initial_split(data_clean, prop = 0.80)
+data_split <- initial_split(data_analysis, prop = 0.80)
 data_train <- training(data_split)
 data_test <- testing(data_split)
 ```
 
+### Model
 Since all variables are on the same scale, we do not need to centre any data.
 ```{r}
-recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
-                 data = data_train)
+recipe <- recipe(class ~ ., data = data_train)
 
 knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
   set_engine("kknn") %>%
@@ -283,16 +281,32 @@ knn_fit <- workflow() %>%
 knn_fit
 ```
 
+### Results
+```{r}
+library(readr)
+library(dplyr)
+library(tidymodels)
+
+# Predict on test data
+predictions <- predict(knn_fit, data_test, type = "class") %>%
+  bind_cols(data_test)
+
+# Confusion matrix
+conf_mat <- conf_mat(predictions, truth = class, estimate = .pred_class)
+conf_mat
+```
+
+
 Perform correlation analysis to identify significant predictors before modeling.
 Evaluate model performance using accuracy or RMSE.
 
 # Discussion:
 
-(will be done by Nazia)
+(will be done by JESSICA)
 
 #### What we found:
 
-summarize what you found
+We found that...
 
 #### Does this align with our expectations?
 

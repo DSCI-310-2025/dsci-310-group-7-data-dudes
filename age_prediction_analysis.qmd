@@ -121,7 +121,6 @@ Here, we read in the data downloaded using `01-download-dataset.R` and cleaned u
 ```{r}
 # read in the data
 data <- read.csv("data/drug-use-by-age-cleaned.csv")
-
 ```
 
 ### Data Cleaning
@@ -135,16 +134,16 @@ The dataset underwent the following preprocessing steps in `02-data-cleaning.R`.
 
 ### EDA
 
-Since we want to investigate whether substance use in adolescence can predict substance use later in life,
-we can first observe how many times the average person in each age group had consumed alcohol in the past 12 months:
+Since we aim to investigate whether substance use during adolescence can predict substance use patterns later in life,
+we begin by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
 ```{r}
 #| echo: false
 
 plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) + 
-  geom_bar(stat = "identity") + 
+  geom_bar(stat = "identity", width=0.7) + 
   geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Proportion of alcohol consumption in past 12 months by age group") +
+  labs(title="Percent alcohol consumption in past 12 months by age group") +
   xlab("age group") +
   ylab("proportion of respondents (%)") +
   ylim(0, 100) +
@@ -152,15 +151,15 @@ plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
 show(plot_alc)
 ```
 
-We can do the same for consumption of marijuana in the past 12 months:
+We apply the same approach to examine marijuana use over the same period:
 
 ```{r}
 #| echo: false
 
 plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) + 
-  geom_bar(stat = "identity") + 
-  geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Proportion of alcohol consumption in past 12 months by age group") +
+  geom_bar(stat = "identity", width=0.7) + 
+  geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+  labs(title="Percent marijuana consumption in past 12 months by age group") +
   xlab("age group") +
   ylab("proportion of respondents (%)") +
   ylim(0, 100) +
@@ -168,7 +167,41 @@ plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
 show(plot_mar)
 ```
 
-(will do more when we know that the data can be loaded properly in analysis file  -naz)
+Both graphs reveal that these substances are commonly used during adolescence.
+However, while alcohol consumption increases significantly in adulthood, marijuana use tends to plateau in early adulthood.
+To further explore the use of harder substances, such as heroin, crack and hallucinogens,
+we shift our focus to the median frequency of use rather than the proportion of users. 
+This is because the proportion of individuals using harder substances is relatively small, 
+making median frequency a more informative metric for understanding usage patterns.
+For instance, we can plot the distribution of heroin use across different age groups:
+
+
+```{r}
+#| echo: false
+
+data <- data %>%
+  mutate(heroin.frequency = as.numeric(heroin.frequency))
+
+plot_her = ggplot(data, aes(x = age, y = heroin.frequency)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+  labs(title="Median frequency of heroin use in past 12 months by age group") +
+  xlab("age group") +
+  ylab("median frequency") +
+  scale_y_continuous(
+    breaks = seq(0, 300, by = 10),
+    labels = seq(0, 300, by = 10)
+  ) +
+  theme_minimal()
+show(plot_her)
+```
+
+The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
+Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
+By analyzing these patterns, we aim to determine whether an individual’s history of substance use during adolescence can predict their substance use behavior later in life. 
+The insights gained from this research could inform prevention programs, 
+helping them design targeted strategies to effectively advocate against drug abuse. 
+This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
 
 ### Analysis

@@ -243,10 +243,8 @@ plot_coke_alc
 
 The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
 Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
-By analyzing these patterns, we aim to determine whether an individual’s history of substance use during adolescence can predict their substance use behavior later in life. 
-The insights gained from this research could inform prevention programs, 
-helping them design targeted strategies to effectively advocate against drug abuse. 
-This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
+By analyzing these patterns, we aim to determine an individual's age group (Under 21 or 21 & Over) based only on their reported substance use history.
+The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
 
 ### Analysis

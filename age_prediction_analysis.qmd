@@ -129,8 +129,8 @@ data <- read.csv("data/drug-use-by-age.csv")
 
 ```{r}
 #| echo: false
-# show the data # REDO LATER
-# data
+# show the first 6 columns of data
+head(data, n=c(17, 6))
 ```
 
 ### EDA
@@ -142,9 +142,9 @@ we can first observe the proportion of individuals in each age group who have co
 #| echo: false
 
 plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) + 
-  geom_bar(stat = "identity") + 
+  geom_bar(stat = "identity", width=0.7) + 
   geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Proportion of alcohol consumption in past 12 months by age group") +
+  labs(title="Percent alcohol consumption in past 12 months by age group") +
   xlab("age group") +
   ylab("proportion of respondents (%)") +
   ylim(0, 100) +
@@ -158,9 +158,9 @@ We can do the same for consumption of marijuana in the past 12 months:
 #| echo: false
 
 plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) + 
-  geom_bar(stat = "identity") + 
+  geom_bar(stat = "identity", width=0.7) + 
   geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Proportion of marijuana consumption in past 12 months by age group") +
+  labs(title="Percent marijuana consumption in past 12 months by age group") +
   xlab("age group") +
   ylab("proportion of respondents (%)") +
   ylim(0, 100) +

@@ -96,18 +96,6 @@ Below is a summary of the variables included in the dataset:
 
 # Methods & Results
 
-(will be done by Jessica and Jade)
-
-* describe in written english the methods you used to perform your analysis from beginning to end that narrates the code the does the analysis.
-* your report should include code which:
-  * loads data from the original source on the web
-  * wrangles and cleans the data from it’s original (downloaded) format to the format necessary for the planned classification or clustering analysis
-  * performs a summary of the data set that is relevant for exploratory data analysis related to the planned classification analysis
-  * creates a visualization of the dataset that is relevant for exploratory data analysis related to the planned classification analysis
-  * performs classification or regression analysis
-  * creates a visualization of the result of the analysis
-* note: all tables and figure should have a figure/table number and a legend
-
 ### Read Data
 
 We downloaded the dataset in `01-download-dataset.R` by retrieving it from a raw GitHub URL and saving it locally in the data/raw directory. 
@@ -151,8 +139,44 @@ The insights gained from this research could inform prevention programs, helping
 
 ### Analysis
 
-blah blah blah
+Our models struggle to correctly classify youth vs. adult due to several key issues:
 
+1. **Small Dataset Size**
+With only 17 rows, the models lack sufficient data to learn meaningful patterns. Machine learning models typically require more data to generalize well.
+
+2. **Class Imbalance in Age Representation**
+The youth class consists of individual ages (e.g., 16, 17, 18), while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
+Because of this, the models struggle to differentiate youth from adults, leading to false positives (misclassifying youth as adults).
+
+3. **Lack of Feature Variation**
+If key features (other than age) don’t provide clear distinctions between youth and adult groups, the models may not have enough useful information to make accurate classifications.
+
+### Potential Solutions
+
+1. **Increase Dataset Size**
+Collect more data to improve model performance.
+
+2. **Feature Engineering**
+Consider adding more relevant features or restructuring age-related data.
+
+3. **Resampling Techniques**
+Use bootstrapping or synthetic sampling (e.g., SMOTE) to balance class representation.
+
+### Model Evaluation
+
+Below are the confusion matrices for each model we tested:
+
+1. Decision Tree
+
+![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png)
+
+2. K Nearest Neighbours (KNN)
+
+![Confusion Matrix: KNN](output/confusion-matrix_knn.png)
+
+3. Logistic Regression
+
+![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png)
 
 # Discussion:
 

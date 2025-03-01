@@ -19,9 +19,8 @@ Using the "Drug Use by Age" dataset from FiveThirtyEight, which compiles data fr
 The dataset contains information about a given age group, and summary info about the percentage of people who have done a drug and the median frequency it is used at. 
 There is information on a wide variety of drugs, including alcohol, marijuana, various illicit drugs, and more.
 We apply feature selection and predictive modeling to assess the strength of this relationship.
-Our findings contribute to understanding how drug use behaviors vary across different age groups and the potential for age prediction in public health and policy contexts.
 
-(add more about the findings at the end)
+Our findings suggest that while age-related trends in substance use are present, challenges such as class imbalance and small dataset size hinder the models' ability to accurately predict age based solely on drug use. Despite these challenges, the analysis highlights the potential for using substance use patterns as part of a broader predictive framework in public health and policy contexts.
 
 # Introduction
 

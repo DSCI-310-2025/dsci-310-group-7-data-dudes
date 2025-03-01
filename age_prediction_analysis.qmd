@@ -23,8 +23,6 @@ Our findings contribute to understanding how drug use behaviors vary across diff
 
 (add more about the findings at the end)
 
----
-
 # Introduction
 
 ### Background and Research Question
@@ -91,9 +89,6 @@ Below is a summary of the variables included in the dataset:
 | `sedative_use`          | Percentage who used sedatives in the past 12 months.                         |
 | `sedative_frequency`    | Median number of times sedatives were used in the past 12 months.            |
 
-
----
-
 # Methods & Results
 
 ### Read Data
@@ -141,25 +136,25 @@ The insights gained from this research could inform prevention programs, helping
 
 Our models struggle to correctly classify youth vs. adult due to several key issues:
 
-1. **Small Dataset Size**
+1. **Small Dataset Size**  
 With only 17 rows, the models lack sufficient data to learn meaningful patterns. Machine learning models typically require more data to generalize well.
 
-2. **Class Imbalance in Age Representation**
+2. **Class Imbalance in Age Representation**  
 The youth class consists of individual ages (e.g., 16, 17, 18), while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
 Because of this, the models struggle to differentiate youth from adults, leading to false positives (misclassifying youth as adults).
 
-3. **Lack of Feature Variation**
+3. **Lack of Feature Variation**  
 If key features (other than age) don’t provide clear distinctions between youth and adult groups, the models may not have enough useful information to make accurate classifications.
 
 ### Potential Solutions
 
-1. **Increase Dataset Size**
+1. **Increase Dataset Size**  
 Collect more data to improve model performance.
 
-2. **Feature Engineering**
+2. **Feature Engineering**  
 Consider adding more relevant features or restructuring age-related data.
 
-3. **Resampling Techniques**
+3. **Resampling Techniques**  
 Use bootstrapping or synthetic sampling (e.g., SMOTE) to balance class representation.
 
 ### Model Evaluation
@@ -178,25 +173,31 @@ Below are the confusion matrices for each model we tested:
 
 ![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png)
 
-# Discussion:
+# Discussion
 
-(will be done by JESSICA)
+### Findings
 
-#### What we found:
+Our models struggled with accurately classifying youth vs. adult due to several key issues identified in the analysis. The small dataset size likely hindered the models' ability to detect meaningful patterns. Additionally, the class imbalance between individual youth ages and adult age ranges made it difficult for the models to generalize and differentiate between these groups effectively. This was evident in the high rates of false positives, where youth were misclassified as adults. Lastly, the lack of feature variation beyond age likely contributed to the models' poor performance, as age alone may not be sufficient to distinguish between youth and adult categories.
 
-We found that...
+### Does This Align with Our Expectations?
 
-#### Does this align with our expectations?
+Yes, these findings align with our expectations. Given the small dataset and the imbalance between the youth and adult classes, we anticipated that our models would struggle with classification accuracy. The confusion matrices for all three models—Decision Tree, KNN, and Logistic Regression—reflected the challenges we expected. The small dataset size likely exacerbated the issue, and the class imbalance was a known factor that we hypothesized would affect performance.
 
-discuss whether this is what you expected to find?
+### Impact of Our Findings
 
-### Impact of our findings
+These findings highlight the limitations of working with small datasets, particularly when dealing with imbalanced classes. In practical terms, the findings suggest that models built on such data may not be reliable for decision-making in contexts where accurate classification is crucial (e.g., youth-focused interventions or adult-targeted policies). The results also emphasize the importance of addressing class imbalance and ensuring that models are trained on sufficiently large and diverse datasets. 
 
-discuss what impact could such findings have?
+### Future Directions
 
-### Future directions
+This analysis raises several future questions:
 
-discuss what future questions could this lead to?
+1. **Expanding the Dataset**  
+   Revisiting the original "Drug Use by Age" dataset from FiveThirtyEight’s repository, derived from the 2013 National Survey on Drug Use and Health, could provide deeper insights into substance use trends across age groups. With more time and resources, we could have leveraged the full dataset to increase sample size, address class imbalance, and engineer more features for improved model performance.
 
+2. **Addressing Class Imbalance**  
+   To improve model performance, we could explore advanced resampling techniques like SMOTE or cost-sensitive learning, which would help balance the dataset and reduce the impact of class imbalance.
+
+3. **Exploring Additional Features**  
+   Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
 
 # References

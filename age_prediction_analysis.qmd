@@ -130,6 +130,7 @@ Harder substances, in particular, exhibit distinct usage patterns compared to mo
 By analyzing these patterns, we aim to determine an individual's age group (Under 21 or 21 & Over) based only on their reported substance use history.
 The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
+\newpage
 
 ### Analysis
 
@@ -156,21 +157,24 @@ Consider adding more relevant features or restructuring age-related data.
 3. **Resampling Techniques**  
 Use bootstrapping or synthetic sampling (e.g., SMOTE) to balance class representation.
 
+\newpage
 ### Model Evaluation
 
 Below are the confusion matrices for each model we tested:
 
 1. Decision Tree
 
-![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png)
+![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){width=50%}
 
 2. K Nearest Neighbours (KNN)
 
-![Confusion Matrix: KNN](output/confusion-matrix_knn.png)
+![Confusion Matrix: KNN](output/confusion-matrix_knn.png){width=50%}
+
+\newpage
 
 3. Logistic Regression
 
-![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png)
+![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png){width=50%}
 
 # Discussion
 
@@ -199,4 +203,5 @@ This analysis raises several future questions:
 3. **Exploring Additional Features**  
    Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
 
+\newpage
 # References

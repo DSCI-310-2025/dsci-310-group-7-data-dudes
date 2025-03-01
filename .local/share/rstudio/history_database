@@ -1,0 +1,513 @@
+0:)
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:)
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select()
+0:glimpse(data_clean)
+0:glimpse(data_clean)
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select()
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select(-age, -n)
+0:glimpse(data_clean)
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select(class, -age, -n)
+0:glimpse(data_clean)
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) <= 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select(-age, -n)
+0:glimpse(data_clean)
+0:plot_mar <- ggplot(data_clean, aes(x=age, y=marijuana.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent marijuana consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_mar)
+0:plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent alcohol consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(axis.text = element_text(size = 8)) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_alc)
+0:plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent alcohol consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(axis.text = element_text(size = 8)) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_alc)
+0:plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent marijuana consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_mar)
+0:plot_her = ggplot(data, aes(x = age, y = heroin.frequency)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_her = ggplot(data, aes(x = as.numeric(age), y = heroin.frequency)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_her = ggplot(data, aes(x = as.numeric(age), y = heroin.frequency)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_her = ggplot(data, aes(x = as.factor(age), y = heroin.frequency)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_her = ggplot(data, aes(x = as.factor(age), y = as.numeric(heroin.frequency))) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:View(data_clean)
+0:alc_ <- cancer |>
+0:ggplot(aes(x = cocaine.frequency, y = alcohol.frequency, color = Class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:alc_ <- data |>
+0:ggplot(aes(x = cocaine.frequency, y = alcohol.frequency, color = Class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:alc_ <- data_clean |>
+0:ggplot(aes(x = cocaine.frequency, y = alcohol.frequency, color = Class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:scatterplot
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = cocaine.frequency, y = alcohol.frequency, color = Class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:View(data_clean)
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = cocaine.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = marijuana.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) < 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select(-age, -n)
+0:glimpse(data_clean)
+0:plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent alcohol consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(axis.text = element_text(size = 8)) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_alc)
+0:plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent marijuana consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_mar)
+0:plot_her = ggplot(data, aes(x = as.factor(age), y = as.numeric(heroin.frequency))) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = heroin.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.5) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = heroin.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.8) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:mlm_recipe <- lm(age ~ alcohol.frequency + marijuana.frequency + cocaine.frequency, data = data_train)
+0:#| include: false
+0:library(tidyverse)
+0:library(rsample)
+0:library(tidymodels)
+0:# put any other packages used here!
+0:#| include: false
+0:# read in the data
+0:data <- read.csv("data/drug-use-by-age.csv")
+0:glimpse(data)
+0:#| echo: false
+0:# show the first 6 columns of data
+0:head(data, n=c(18, 6))
+0:data_clean <- data %>%
+0:mutate(
+0:across(-age, ~ as.numeric(gsub("-", "0", .))),
+0:class = ifelse(as.numeric(gsub("\\D", "", age)) < 21, "Youth", "Adult"),
+0:class = factor(class)
+0:) %>%
+0:select(-age, -n)
+0:glimpse(data_clean)
+0:#| echo: false
+0:plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent alcohol consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(axis.text = element_text(size = 8)) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_alc)
+0:#| echo: false
+0:plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent marijuana consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_mar)
+0:#| echo: false
+0:#| warning: false
+0:plot_her = ggplot(data, aes(x = as.factor(age), y = as.numeric(heroin.frequency))) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = heroin.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.8) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:data_split <- initial_split(data_clean, prop = 0.80)
+0:data_train <- training(data_split)
+0:data_test <- testing(data_split)
+0:mlm_recipe <- lm(age ~ alcohol.frequency + marijuana.frequency + cocaine.frequency, data = data_train)
+0:mlm_recipe <- lm(class ~ alcohol.frequency + marijuana.frequency + cocaine.frequency, data = data_train)
+0:knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) |>
+0:set_engine("kknn") |>
+0:set_mode("classification")
+0:knn_fit <- workflow() |>
+0:add_recipe(cancer_recipe) |>
+0:add_model(knn_spec) |>
+0:fit(data = cancer_train)
+0:recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
+0:data = cancer_subtrain)
+0:recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
+0:data = data_train)
+0:knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) |>
+0:set_engine("kknn") |>
+0:set_mode("classification")
+0:knn_fit <- workflow() |>
+0:add_recipe(recipe) |>
+0:add_model(knn_spec) |>
+0:fit(data = data_train)
+0:recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
+0:data = data_train)
+0:knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
+0:set_engine("kknn") %>%
+0:set_mode("classification")
+0:knn_fit <- workflow() %>%
+0:add_recipe(recipe) %>%
+0:add_model(knn_spec) %>%
+0:fit(data = data_train)
+0:recipe <- recipe(class ~ alcohol.frequency + marijuana.frequency + stimulant.frequency,
+0:data = data_train)
+0:#| include: false
+0:library(tidyverse)
+0:library(rsample)
+0:library(tidymodels)
+0:# put any other packages used here!
+0:# read in the data
+0:data <- read.csv("data/drug-use-by-age-cleaned.csv")
+0:#| include: false
+0:# read in the data
+0:data <- read.csv("data/drug-use-by-age.csv")
+0:glimpse(data)
+0:#| echo: false
+0:# show the first 6 columns of data
+0:head(data, n=c(18, 6))
+0:#| echo: false
+0:plot_alc <- ggplot(data, aes(x=age, y=alcohol.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=alcohol.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent alcohol consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(axis.text = element_text(size = 8)) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_alc)
+0:#| echo: false
+0:plot_mar <- ggplot(data, aes(x=age, y=marijuana.use)) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=marijuana.use), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Percent marijuana consumption in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("proportion of respondents (%)") +
+0:ylim(0, 100) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_mar)
+0:#| echo: false
+0:#| warning: false
+0:plot_her = ggplot(data, aes(x = as.factor(age), y = as.numeric(heroin.frequency))) +
+0:geom_bar(stat = "identity", width=0.7) +
+0:geom_text(aes(label=heroin.frequency), vjust=-0.3, color="grey10", size=3) +
+0:labs(title="Median frequency of heroin use in past 12 months by age group") +
+0:xlab("age group") +
+0:ylab("median frequency") +
+0:scale_y_continuous(
+0:breaks = seq(0, 300, by = 25),
+0:labels = seq(0, 300, by = 25)
+0:) +
+0:theme(
+0:plot.title = element_text(size = 10, face = "bold"),
+0:axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+0:axis.text.y = element_text(size = 7)
+0:)
+0:show(plot_her)
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = heroin.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.8) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:data_clean <- read_rmd("data/drug-use-by-age-cleaned.csv")
+0:#| include: false
+0:library(tidyverse)
+0:library(readr)
+0:library(rsample)
+0:library(tidymodels)
+0:# put any other packages used here!
+0:data_clean <- read_rmd("data/drug-use-by-age-cleaned.csv")
+0:data_clean <- read_rds("data/drug-use-by-age-cleaned.csv")
+0:data_clean <- read_rds("data/drug-use-by-age-cleaned.csv")
+0:data_clean <- read_csv("data/drug-use-by-age-cleaned.csv")
+0:plot_coke_alc <- data_clean |>
+0:ggplot(aes(x = heroin.frequency, y = alcohol.frequency, color = class)) +
+0:geom_point(alpha = 0.8) +
+0:labs(color = "Age Group") +
+0:scale_color_manual(values = c("darkorange", "steelblue")) +
+0:theme(text = element_text(size = 12))
+0:plot_coke_alc
+0:View(data_clean)
+0:View(data)
+0:data_clean <- read_csv("data/drug-use-by-age-cleaned.csv")
+0:data_analysis <- data_clean %>%
+0:select(-n)
+0:View(data_analysis)
+0:data_clean <- read_csv("data/drug-use-by-age-cleaned.csv")
+0:data_analysis <- data_clean %>%
+0:select(-n, -age)
+0:data_split <- initial_split(data_analysis, prop = 0.80)
+0:data_train <- training(data_split)
+0:data_test <- testing(data_split)
+0:recipe <- recipe(class ~ ., data = data_train)
+0:recipe <- recipe(class ~ ., data = data_train)
+0:library(readr)
+0:library(dplyr)
+0:library(tidymodels)
+0:# Predict on test data
+0:predictions <- predict(knn_fit, data_test, type = "class") %>%
+0:bind_cols(data_test)
+0:knn_fit <- workflow() %>%
+0:add_recipe(recipe) %>%
+0:add_model(knn_spec) %>%
+0:fit(data = data_train)
+0:knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
+0:set_engine("kknn") %>%
+0:set_mode("classification")
+0:knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = 3) %>%
+0:set_engine("kknn") %>%
+0:set_mode("classification")
+0:knn_fit <- workflow() %>%
+0:add_recipe(recipe) %>%
+0:add_model(knn_spec) %>%
+0:fit(data = data_train)
+1740871987528:rmarkdown::render("age_prediction_analysis.qmd")

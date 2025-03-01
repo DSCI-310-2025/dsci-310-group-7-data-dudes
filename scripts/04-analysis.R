@@ -48,7 +48,7 @@ train_and_evaluate <- function(model_spec, model_name) {
     # Plot confusion matrix
     conf_plot <- ggplot(conf_df, aes(x = Truth, y = Prediction)) +
         geom_tile(color = "black", fill = "white") + # Black border, white fill
-        geom_text(aes(label = Count), size = 6, color = "black") + # Black text color
+        geom_text(aes(label = Count), size = 6.5, color = "black") + # Black text color
         labs(title = paste(model_name, "Confusion Matrix"), x = "Actual Class", y = "Predicted Class") +
         theme_minimal()
 

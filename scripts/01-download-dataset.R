@@ -2,3 +2,4 @@ url <- "https://raw.githubusercontent.com/rudeboybert/fivethirtyeight/refs/heads
 destination <- "data/raw/drug-use-by-age.csv"
 
 download.file(url, destination)
+

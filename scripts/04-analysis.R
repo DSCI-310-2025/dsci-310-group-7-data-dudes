@@ -53,7 +53,7 @@ train_and_evaluate <- function(model_spec, model_name) {
         theme_minimal()
 
     # Save plot
-    file_path <- file.path(output_dir, paste0(model_name, "-confusion-matrix.png"))
+    file_path <- file.path(output_dir, paste0("confusion-matrix_", model_name, ".png"))
     ggsave(file_path, plot = conf_plot, width = 5, height = 4, dpi = 300)
 
 
@@ -78,9 +78,9 @@ tree_spec <- decision_tree() %>%
     set_mode("classification")
 
 # Train models and store results
-knn_results <- train_and_evaluate(knn_spec, "KNN")
-log_reg_results <- train_and_evaluate(log_reg_spec, "Logistic_Regression")
-tree_results <- train_and_evaluate(tree_spec, "Decision_Tree")
+knn_results <- train_and_evaluate(knn_spec, "knn")
+log_reg_results <- train_and_evaluate(log_reg_spec, "logistic-regression")
+tree_results <- train_and_evaluate(tree_spec, "decision-tree")
 
 # Print file paths
 print(paste("KNN Confusion Matrix saved at:", knn_results$plot_path))

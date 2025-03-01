@@ -66,16 +66,26 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://docs.docker.com/engine/install/">Install Docker on Linux</a></li>
 </ul>
 <p><strong>3. Within your local computer, set up the environment using Docker image:</strong></p>
+<ul>
+<li>Windows users, run the following:</li>
+</ul>
 <pre><code>docker build -t data-dudes-analysis .</code></pre>
+<pre><code>docker run -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis</code></pre>
 <ul>
-<li>Windows users should run:</li>
+<li>Mac users, run the following:</li>
 </ul>
-<pre><code>docker run -it --rm -v "$(pwd)":/project data-dudes-analysis</code></pre>
+<pre><code>docker build --platform=linux/amd64 -t data-dudes-analysis .</code></pre>
+<pre><code>docker run --platform=linux/amd64 -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis</code></pre>
+<p><strong>4. Access the analysis</strong></p>
 <ul>
-<li>Mac users should run:</li>
+<li>Open a browser and go to http://localhost:8787
+<ul>
+<li>Username: <strong>rstudio</strong></li>
+<li>Password: from output of the previous <code>docker run</code> command</li>
+</ul></li>
+<li>open the file <code>age_predicition_analysis.qmd</code> in the bottom right panel</li>
+<li></li>
 </ul>
-<pre><code>docker run --platform=linux/amd64 -it --rm -v "$(pwd)":/project data-dudes-analysis</code></pre>
-<p><strong>4. Excecute the analysis</strong> Inside the Docker container, run</p>
 <pre><code>Rscript scripts/run_analysis.R</code></pre>
 <p><strong>5. Access the results in the <code>output</code> directory of the project folder</strong></p>
 </section>

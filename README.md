@@ -23,25 +23,38 @@ cd dsci-310-group-7-data-dudes
 - [Install Docker on Linux](https://docs.docker.com/engine/install/)
 
 **3. Within your local computer, set up the environment using Docker image:**
+
+- Windows users, run the following:
 ```
 docker build -t data-dudes-analysis .
 ```
-- Windows users should run:
 ```
-docker run -it --rm -v "$(pwd)":/project data-dudes-analysis
+docker run -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis
 ```
-- Mac users should run:
+- Mac users, run the following:
 ```
-docker run --platform=linux/amd64 -it --rm -v "$(pwd)":/project data-dudes-analysis
+docker build --platform=linux/amd64 -t data-dudes-analysis .
 ```
-
-**4. Excecute the analysis**
-Inside the Docker container, run
 ```
-Rscript scripts/run_analysis.R
+docker run --platform=linux/amd64 -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis
 ```
 
-**5. Access the results in the `output` directory of the project folder**
+**4. Access the analysis**
+
+- Open a browser and go to http://localhost:8787
+    - Username: **rstudio**
+    - Password: from output of the previous `docker run` command
+- open the file `age_predicition_analysis.qmd` in the bottom right panel
+- Click the "Run" button in the top left of the RStudio panel to start running the analysis
+
+**5. Run the analysis script**
+- Inside RStudio, go to the terminal or the script pane and run the following command to start the analysis:
+```
+rmarkdown::render("age_prediction_analysis.qmd")
+```
+
+**6. View the results by opening the newly created age_prediction_analysis.html**
+
 
 ## Dependencies:
 

@@ -31,7 +31,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: DSCI-310-2025/dsci-310-group-7-data-dudes # change to your image
+          images: jadeeechen/dsci-310-group-7-data-dudes # change to your image
           tags: |
             type=raw, value={{sha}},enable=${{github.ref_type != 'tag' }}
             type=raw, value=latest

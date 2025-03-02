@@ -1,5 +1,7 @@
 library(tidyverse)
 library(ggplot2)
+library(dplyr)
+library(tidyr)
 
 data_c <- read_csv("data/data-cleaned.csv")
 
@@ -77,3 +79,71 @@ plot_her_mar <- data_c |>
   )
 show(plot_her_mar)
 ggsave("output/eda-heroin-marijuana.png", plot=plot_her_mar, width=8, height=6, dpi=300)
+
+# now lets add some plots on comparing youth vs adult
+
+data_t <- read_csv("data/data-cleaned-transformed.csv")
+
+# aggregate the data such that there are two rows to compare: youth and adult
+data_aggregated <- data_t %>%
+    group_by(class) %>%
+    summarise(across(where(is.numeric), ~ weighted.mean(.x, n, na.rm = TRUE), 
+                     .names = "mean_{.col}"),
+              total_n = sum(n)) 
+head(data_aggregated)
+
+# change the form of the data so that it is easier to plot
+data_long <- data_aggregated %>%
+  select(-mean_n) %>%
+  pivot_longer(cols = starts_with("mean_"), 
+               names_to = "variable", values_to = "value") %>%
+  mutate(variable = gsub("mean_", "", variable))
+head(data_long)
+
+# Create large plot comparing all drugs for adult and youth
+drug_class_comparison <- ggplot(data_long, aes(x = variable, y = value, fill = class)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  theme_bw() +
+  labs(title = "Comparison of Youth vs. Adult Drug Use",
+       x = "Substance Use Variable",
+       y = "Weighted Mean Value",
+       fill = "Class") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# above is too large/busy of a plot, simplify by splitting it up
+
+# Split data into two categories: "use" and "frequency"
+data_use <- data_long %>%
+  filter(grepl(paste("use", collapse = "|"), variable))
+
+data_freq <- data_long %>%
+  filter(grepl(paste("frequency", collapse = "|"), variable))
+
+# Bar plot for substance use
+plot_all_use <- ggplot(data_use, aes(x = variable, y = value, fill = class)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_bw() +
+  labs(title = "Youth vs. Adult: Substance Use",
+       x = "Substance Type",
+       y = "Mean Substance Use (%)",
+       fill = "Class") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
+                    labels = c("adult" = "Adult", "youth" = "Youth"))
+plot_all_use
+ggsave("output/eda-all-use.png", plot=plot_all_use, width=8, height=6, dpi=300)
+
+
+
+# Bar plot for frequency
+plot_all_freq <- ggplot(data_freq, aes(x = variable, y = value, fill = class)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_bw() +
+  labs(title = "Youth vs. Adult: Substance Use Frequency",
+       x = "Substance Type",
+       y = "Mean Frequency per Year)",
+       fill = "Class") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
+                    labels = c("adult" = "Adult", "youth" = "Youth"))
+plot_all_freq
+ggsave("output/eda-all-freq.png", plot=plot_all_freq, width=8, height=6, dpi=300)

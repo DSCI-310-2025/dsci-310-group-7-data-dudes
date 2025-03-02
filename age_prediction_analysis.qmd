@@ -119,7 +119,28 @@ The dataset underwent the following preprocessing steps in `02-data-clean-transf
 
 Since we aim to predict age category using drug use patterns, 
 we performed some exploratory data analysis (EDA) to gain a better understanding of our dataset in `03-eda.R`. 
-We began by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
+The following shows the most valuable plots and insights we found.
+
+We first want to take a look at the data to understand what we are dealing with. Let's view the first row of the data as an example:
+
+```{r}
+#| echo: false
+# show the first 3 columns of data
+data <- read.csv("data/data-cleaned-transformed.csv")
+head(data, 1)
+```
+
+We can also get a summary of each variable to note the ranges of data we have, and if we have any NA values present:
+
+```{r}
+#| echo: false
+summary(data)
+```
+
+We do seem to have a few missing values, but not very many so it doesn't seem to be a big problem for us.
+
+Since alcohol is one of the more common drugs on this list, 
+we can begin by looking at the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
 ![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda-alcohol.png)
 
@@ -144,11 +165,24 @@ We also added a linear regression line to help us determine whether there is any
 
 ![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda-heroin-marijuana.png)
 
+Finally, let's look at some EDA that compares the two main groups we are looking at: youth and adult.
+
+![Comparing Substance Use between Adults and Youth](output/eda-all-use.png)
+
+Some of these results are expected, such as the adults drinking more alcohol than the youth.
+
+![Comparing Frequency Use between Adults and Youth](output/eda-all-freq.png)
+
+In general, the adults seem to use more frequently throughout the year in comparison to the youth. 
+There are some where this isn't the case, such as tranquilizer frequency, which is interesting to note.
+
+
 The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
 Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
 By analyzing these patterns, we aim to determine an individual's age group (Under 21 or 21 & Over) based only on their reported substance use history.
 The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. 
 This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
+
 
 \newpage
 

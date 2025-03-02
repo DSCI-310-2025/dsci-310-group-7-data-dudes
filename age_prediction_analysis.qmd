@@ -15,12 +15,18 @@ bibliography: references.bib
 ## Summary
 
 This study explores the relationship between drug use and age, aiming to determine whether a person's reported substance use can serve as a reliable predictor of their age.
-Using the "Drug Use by Age" dataset from FiveThirtyEight, which compiles data from the National Survey on Drug Use and Health [@538_drug_use], we employ statistical techniques to analyze the relationship between age and substance use. 
-The dataset contains information about a given age group, and summary info about the percentage of people who have done a drug and the median frequency it is used at. 
-There is information on a wide variety of drugs, including alcohol, marijuana, various illicit drugs, and more.
-We apply feature selection and predictive modeling to assess the strength of this relationship.
+Using the "Drug Use by Age" dataset from FiveThirtyEight, 
+which compiles data from the National Survey on Drug Use and Health [@538_drug_use], 
+we employ statistical techniques to analyze the relationship between age and substance use. 
+The dataset contains information about a given age group, 
+and summary info about the percentage of people who have done a drug and the median frequency it is used at. 
+There is information on a wide variety of drugs, 
+including alcohol, marijuana, various illicit drugs, and more.
+We apply predictive modeling to assess the strength of this relationship.
 
-Our findings suggest that while age-related trends in substance use are present, challenges such as class imbalance and small dataset size hinder the models' ability to accurately predict age based solely on drug use. Despite these challenges, the analysis highlights the potential for using substance use patterns as part of a broader predictive framework in public health and policy contexts.
+Our findings suggest that while age-related trends in substance use are present, 
+challenges such as class imbalance and small dataset size hinder the models' ability to accurately predict age based solely on drug use. 
+Despite these challenges, the analysis highlights the potential for using substance use patterns as part of a broader predictive framework in public health and policy contexts.
 
 # Introduction
 
@@ -30,36 +36,40 @@ Age can greatly influence many aspects of how we behave and what decisions we ma
 Patterns of drug consumption change over time in a person’s life, reflecting their social, biological, and environmental influences.
 Research indicates that substance use disorders, including those related to alcohol, tobacco, cannabis, and opioids, generally decrease with age [@drug_use_patterns].
 Younger individuals often engage in higher rates of substance experimentation, while older adults tend to exhibit more stable or declining usage patterns. 
-Understanding these age-related trends is essential for developing effective public health strategies, addiction prevention programs,  and targeted interventions.
+Understanding these age-related trends is essential for developing effective public health strategies, addiction prevention programs, and targeted interventions.
 
 In this study, we investigate whether a person’s reported drug use can serve as a predictor of their age [@538_drug_use]. 
 Previous research has highlighted the progression and predictors of substance use across the lifespan. 
 For instance, studies have identified that early initiation of substance use is associated with an increased risk of developing substance use disorders later in life [@childhood_predictors]. 
 Furthermore, patterns observed during adolescence are often associated with continued use or potential abuse in adulthood [@adolescent_vs_adult_predictors].
 This tells us that finding out which age groups are using which drugs can be useful information for addressing and preventing issues like this.
-Moreover, life-course patterns of substance abuse reveal that older adults with substance misuse issues often reflect on their usage patterns, providing insights into the development and persistence of these behaviors over time [@life_patterns_substance_abuse]. 
+Moreover, life-course patterns of substance abuse reveal that older adults with substance misuse issues often reflect on their usage patterns, 
+providing insights into the development and persistence of these behaviors over time [@life_patterns_substance_abuse]. 
 Recognizing these patterns across different age groups can inform the creation of age-specific prevention and treatment programs.
 By assessing the strength of the relationship between age and drug use behaviors, our analysis contributes to discussions on behavioral health and its implications.
 
 **This leads us to our Research Question:**
 
-* *Can we accurately predict if an individual is a Youth (Under 21) or Adult (21 & Over) based only on their reported patterns of substance use?*
-
+* *Can we accurately predict if an individual is a Youth (under 21 years old) or Adult (21 and over) based only on their reported patterns of substance use?*
 
 ### About the Data
 
-To address our research question, we utilize the "Drug Use by Age" dataset sourced from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), 
-which is derived from from the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3).
-This study was conducted by the United States Department of Health and Human Services, Substance Abuse and Mental Health Services Administration (SAMHSA), Center for Behavioral Health Statistics and Quality.
+To address our research question, we utilize the "Drug Use by Age" dataset sourced 
+from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), 
+which is derived from 
+the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3).
+This study was conducted by the United States Department of Health and Human Services, 
+Substance Abuse and Mental Health Services Administration (SAMHSA), 
+Center for Behavioral Health Statistics and Quality.
 
 The dataset covers self-reported drug use trends across 17 age groups in the United States, examining 13 different substances.
 The dataset includes both legal substances, such as alcohol and marijuana, and illicit drugs, offering a broad perspective on substance use trends for each age group.
 
 Below is a summary of the variables included in the dataset:
-
-| Variable Name           | Description                                                                 |
-|-------------------------|----------------------------------------------------------------------|
-| `age`                   | Age group of respondents (e.g., 12, '22-23', '35-49', '65+' etc.).                     |
+ 
+| Variable Name              | Description                                                               |
+|----------------------------|---------------------------------------------------------------------------|
+| `age`                   | Age group of respondents (e.g., 12, '22-23', '35-49', '65+' etc.).           |
 | `n`                     | Number of people surveyed in each age group.                                 |
 | `alcohol_use`           | Percentage of respondents who used alcohol in the past 12 months.            |
 | `alcohol_frequency`     | Median number of times alcohol was used in the past 12 months.               |
@@ -88,22 +98,28 @@ Below is a summary of the variables included in the dataset:
 | `sedative_use`          | Percentage who used sedatives in the past 12 months.                         |
 | `sedative_frequency`    | Median number of times sedatives were used in the past 12 months.            |
 
-# Methods & Results
+# Methods and Results
 
 ### Read Data
 
-We downloaded the dataset in `01-download-dataset.R` by retrieving it from a raw GitHub URL and saving it locally in the data/raw directory. 
+We downloaded the dataset in `01-download-dataset.R` by retrieving it from a raw GitHub URL, 
+and saving it locally in the data/raw directory. 
 
 ### Data Cleaning & Transformation
 
 The dataset underwent the following preprocessing steps in `02-data-clean-transform.R`:
 
 1. Replaced missing values: Instances of `-` in character columns were converted to `NA` to handle missing data appropriately.
+
 2. Converted character columns to numeric: All character columns (except age) were coerced into numeric format, introducing `NA`s where conversion was not possible.
+
 3. Created a new column, `class`, to classify participants as `youth` or `adult` based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
 
 ### EDA
-Since we aim to predict age category using drug use patterns, we performed some exploratory data analysis to gain a better understanding of our dataset in `03-eda.R`. We began by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
+
+Since we aim to predict age category using drug use patterns, 
+we performed some exploratory data analysis (EDA) to gain a better understanding of our dataset in `03-eda.R`. 
+We began by visualizing the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
 ![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda-alcohol.png)
 
@@ -112,7 +128,9 @@ We also applied the same approach to examine marijuana use over the same period:
 ![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda-marijuana.png)
 
 Both graphs reveal that these substances are commonly used during adolescence.
-However, while alcohol consumption increases significantly in adulthood, marijuana use tends to plateau in early adulthood.
+However, while alcohol consumption increases significantly in adulthood, 
+marijuana use tends to plateau in early adulthood.
+
 To explore the use of hard drugs, such as heroin, crack and hallucinogens,
 we shift our focus to the median frequency of use rather than the proportion of users. 
 This is because the proportion of individuals using harder substances is relatively small, 
@@ -121,44 +139,36 @@ For instance, we can plot the distribution of heroin use across different age gr
 
 ![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda-heroin.png)
 
-To explore the potential relationship between the frequency of heroin use and marijuana use among individuals, we used a scatter plot of each age group's data points. We also added a linear regression line to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
+To explore the potential relationship between the frequency of heroin use and marijuana use among individuals, we used a scatter plot of each age group's data points. 
+We also added a linear regression line to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
 
 ![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda-heroin-marijuana.png)
 
 The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
 Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
 By analyzing these patterns, we aim to determine an individual's age group (Under 21 or 21 & Over) based only on their reported substance use history.
-The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
+The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. 
+This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
 \newpage
 
 ### Analysis
 
-Our models struggle to correctly classify youth vs. adult due to several key issues:
+First, since we are doing prediction, we did a train/test split on our data. 
+This way, we can test and compare our models' ability to predict accurately.
 
-1. **Small Dataset Size**  
-With only 17 rows, the models lack sufficient data to learn meaningful patterns. Machine learning models typically require more data to generalize well.
+We chose to run three different models on our data: 
 
-2. **Class Imbalance in Age Representation**  
-The youth class consists of individual ages (e.g., 16, 17, 18), while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
-Because of this, the models struggle to differentiate youth from adults, leading to false positives (misclassifying youth as adults).
+1. A Decision tree model
+2. K-Nearest-Neighbors (KNN) Regression
+3. Logistic Regression
 
-3. **Lack of Feature Variation**  
-If key features (other than age) don’t provide clear distinctions between youth and adult groups, the models may not have enough useful information to make accurate classifications.
+This can be seen in the `scripts/04-analysis.R` file.
 
-### Potential Solutions
-
-1. **Increase Dataset Size**  
-Collect more data to improve model performance.
-
-2. **Feature Engineering**  
-Consider adding more relevant features or restructuring age-related data.
-
-3. **Resampling Techniques**  
-Use bootstrapping or synthetic sampling (e.g., SMOTE) to balance class representation.
-
-\newpage
 ### Model Evaluation
+
+After creating the models, we want to test their ability to predict the youth/adult class accurately. 
+We do this by creating confusion matrices, where we can see a count of which model guesses the class correctly on our test data.
 
 Below are the confusion matrices for each model we tested:
 
@@ -166,29 +176,68 @@ Below are the confusion matrices for each model we tested:
 
 ![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){width=50%}
 
+\newpage
+
 2. K Nearest Neighbours (KNN)
 
 ![Confusion Matrix: KNN](output/confusion-matrix_knn.png){width=50%}
-
-\newpage
 
 3. Logistic Regression
 
 ![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png){width=50%}
 
+
+Our models struggle to correctly classify youth vs. adult due to several key issues:
+
+1. **Small Dataset Size**  
+With only 17 rows, the models lack sufficient data to learn meaningful patterns. Machine learning models, like our decision tree, typically require more data to generalize well. Additionally, there are not many points for the regression models to work off of.
+
+2. **Class Imbalance in Age Representation**  
+The youth class consists of individual ages (e.g., 16, 17, 18), while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
+Because of this, the models struggle to differentiate youth from adults, leading to false positives (misclassifying youth as adults).
+
+3. **Lack of Feature Variation**  
+If the key features (not including age) don’t provide clear distinctions between youth and adult groups, the models may not have enough useful information to make accurate classifications. We do not have a wide variety of data, only information pertaining to drug use, and it is possible it may not be variable enough to accurately predict between the groups.
+
+### Potential Solutions
+
+1. **Increase Dataset Size**  
+Collect more data to improve model performance. The Data is collected from a lot more individuals, and then aggregated to summarize between each age group. Using the original data would probably produce much better results.
+
+2. **Feature Engineering**  
+We could consider adding more/adjusting our features or restructuring age-related data.
+
+3. **Resampling Techniques**  
+Use a bootstrapping or synthetic sampling (such as SMOTE) technique to balance the class representation.
+
+
 # Discussion
 
 ### Findings
 
-Our models struggled with accurately classifying youth vs. adult due to several key issues identified in the analysis. The small dataset size likely hindered the models' ability to detect meaningful patterns. Additionally, the class imbalance between individual youth ages and adult age ranges made it difficult for the models to generalize and differentiate between these groups effectively. This was evident in the high rates of false positives, where youth were misclassified as adults. Lastly, the lack of feature variation beyond age likely contributed to the models' poor performance, as age alone may not be sufficient to distinguish between youth and adult categories.
+Our models struggled with accurately classifying youth vs. adult due to several key issues identified in the analysis. 
+The small dataset size likely hindered the models' ability to detect meaningful patterns. 
+Additionally, the class imbalance between individual youth ages and adult age ranges made it difficult for the models to generalize and differentiate between these groups effectively. 
+This was evident in the high rates of false positives, where youth were misclassified as adults. 
+Lastly, the lack of feature variation beyond age likely contributed to the models' poor performance, as age alone may not be sufficient to distinguish between youth and adult categories.
+
+We saw that our models were able to correctly predict the adult class, yet often made errors when predicting the youth class. 
+However, since we have such few data points, we cannot be confident that the model is accurately predictign the adult class, or if it was more just luck. 
+We need more data points not only to train our model better, but also test our model and be confident it is a good fit. 
+If we were to continue with this analysis in the future, we would likely need to find the dataset that this one aggregated the information from, that way we can build our models and understanding.
 
 ### Does This Align with Our Expectations?
 
-Yes, these findings align with our expectations. Given the small dataset and the imbalance between the youth and adult classes, we anticipated that our models would struggle with classification accuracy. The confusion matrices for all three models—Decision Tree, KNN, and Logistic Regression—reflected the challenges we expected. The small dataset size likely exacerbated the issue, and the class imbalance was a known factor that we hypothesized would affect performance.
+Yes, these findings align with our expectations. 
+Given the small dataset and the imbalance between the youth and adult classes, we anticipated that our models would struggle with classification accuracy. 
+The confusion matrices for all three models-Decision Tree, KNN, and Logistic Regression- reflected the challenges we expected. 
+The small dataset size likely exacerbated the issue, and the class imbalance was a known factor that we hypothesized would affect performance.
 
 ### Impact of Our Findings
 
-These findings highlight the limitations of working with small datasets, particularly when dealing with imbalanced classes. In practical terms, the findings suggest that models built on such data may not be reliable for decision-making in contexts where accurate classification is crucial (e.g., youth-focused interventions or adult-targeted policies). The results also emphasize the importance of addressing class imbalance and ensuring that models are trained on sufficiently large and diverse datasets. 
+These findings highlight the limitations of working with small datasets, particularly when dealing with imbalanced classes. 
+In practical terms, the findings suggest that models built on such data may not be reliable for decision-making in contexts where accurate classification is crucial (e.g., youth-focused interventions or adult-targeted policies). 
+The results also emphasize the importance of addressing class imbalance and ensuring that models are trained on sufficiently large and diverse datasets. 
 
 ### Future Directions
 
@@ -204,4 +253,5 @@ This analysis raises several future questions:
    Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
 
 \newpage
+
 # References

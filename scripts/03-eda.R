@@ -84,6 +84,8 @@ ggsave("output/eda-heroin-marijuana.png", plot=plot_her_mar, width=8, height=6, 
 
 data_t <- read_csv("data/data-cleaned-transformed.csv")
 
+summary(data_t)
+
 # aggregate the data such that there are two rows to compare: youth and adult
 data_aggregated <- data_t %>%
     group_by(class) %>%
@@ -140,7 +142,7 @@ plot_all_freq <- ggplot(data_freq, aes(x = variable, y = value, fill = class)) +
   theme_bw() +
   labs(title = "Youth vs. Adult: Substance Use Frequency",
        x = "Substance Type",
-       y = "Mean Frequency per Year)",
+       y = "Mean Frequency of Group per Year",
        fill = "Class") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),

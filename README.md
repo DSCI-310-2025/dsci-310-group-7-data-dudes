@@ -65,11 +65,7 @@ docker run --platform=linux/amd64 -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio
 - Click the "Run" button in the top left of the RStudio panel to start running the analysis
 
 5. **Run the analysis script**
-- Inside RStudio, go to the terminal or the script pane and run the following command to start the analysis:
-
-```r
-rmarkdown::render("age_prediction_analysis.qmd")
-```
+- Click the "Render" button in the top left of the RStudio panel to render the Quarto file detailing our analysis
 
 6. **View the results by opening the newly created age_prediction_analysis.html**
 

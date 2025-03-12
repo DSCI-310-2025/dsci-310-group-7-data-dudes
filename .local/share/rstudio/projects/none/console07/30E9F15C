@@ -1,11 +1,0 @@
-]0;~[?2004hrstudio@8fa2d7a9f651:~$ [7mRscript scripts/run_analysis.R[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CRscript scripts/run_analysis.R
-[?2004lFatal error: cannot open file 'scripts/run_analysis.R': No such file or directory
-]0;~[?2004hrstudio@8fa2d7a9f651:~$ make analysis
-[?2004lRscript 01-download-dataset.R
-Fatal error: cannot open file '01-download-dataset.R': No such file or directory
-make: *** [Makefile:2: analysis] Error 2
-]0;~[?2004hrstudio@8fa2d7a9f651:~$ mal=ke an[K[K[K[K[K[K[Kke analysis
-[?2004lRscript 01-download-dataset.R
-Fatal error: cannot open file '01-download-dataset.R': No such file or directory
-make: *** [Makefile:2: analysis] Error 2
-]0;~[?2004hrstudio@8fa2d7a9f651:~$ make [?2004l[?2004h[?2004l

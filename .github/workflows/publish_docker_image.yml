@@ -10,7 +10,7 @@ on:
   push:
     paths:
       - 'Dockerfile'
-      - .github/workflows/docker-publish.yml # or whatever you named the file
+      - .github/workflows/publish_docker_image.yml # or whatever you named the file
       - 'conda-linux-64.lock'
 
 jobs:

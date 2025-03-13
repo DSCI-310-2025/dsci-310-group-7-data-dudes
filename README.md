@@ -97,8 +97,9 @@ docker run --platform=linux/amd64 -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio
 
 ## Licenses
 
-These are the licences contained in LICENSE.md:
+These are the licences contained in this repository:
 
-- MIT License
+- For code objects: [MIT License](LICENSE-MIT)
+- For non-code objects: [Creative Commons](LICENSE-CC)
 
 ![GitHub license](https://img.shields.io/github/license/DSCI-310-2025/dsci-310-group-7-data-dudes) 

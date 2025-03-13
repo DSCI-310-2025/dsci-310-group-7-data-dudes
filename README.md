@@ -44,8 +44,9 @@ docker build -t data-dudes-analysis .
 ```
 
 ```bash
-docker run -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis
+docker run -it --rm -p 8787:8787 -e PASSWORD="sushi" data-dudes-analysis
 ```
+
 - Mac users, run the following:
 
 ```bash
@@ -53,21 +54,20 @@ docker build --platform=linux/amd64 -t data-dudes-analysis .
 ```
 
 ```bash
-docker run --platform=linux/amd64 -it --rm -p 8787:8787 -v /$(pwd):/home/rstudio data-dudes-analysis
+docker run --platform=linux/amd64 -it --rm -p 8787:8787 -e PASSWORD="sushi" data-dudes-analysis
 ```
 
 4. **Access the analysis**
 
 - Open a browser and go to http://localhost:8787
     - Username: **rstudio**
-    - Password: from output of the previous `docker run` command
-- open the file `age_predicition_analysis.qmd` in the bottom right panel
-- Click the "Run" button in the top left of the RStudio panel to start running the analysis
+    - Password: **sushi**
+- navigate to the file `project` folder in the bottom right panel to view all files
 
 5. **Run the analysis script**
-- Click the "Render" button in the top left of the RStudio panel to render the Quarto file detailing our analysis
+- in the terminal, type `make ...` # TO DO
 
-6. **View the results by opening the newly created age_prediction_analysis.html**
+6. **View the results by ...** # TO DO
 
 
 ## Dependencies

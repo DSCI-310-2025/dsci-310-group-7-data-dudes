@@ -15,6 +15,8 @@ contains the results of a nationwide survey that collected information about dru
 
 We use this data to predict an individual's age group as Youth (Under 21) or Adult (21 & Over) based on their history of reported substance use.
 
+We created and ran three different models using a train/test split on our data. All three models were unable to completely correctly classify youth vs. adult due to some limitations with our dataset, mostly a limited sample size and imbalance in how data was categorized.
+
 ## How To Run:
 
 Use the following steps to reproduce the analysis in a containerized environment:

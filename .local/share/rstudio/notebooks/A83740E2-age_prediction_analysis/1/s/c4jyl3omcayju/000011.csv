@@ -1,4 +1,0 @@
-"0","#| echo: false"
-"0","# show the first 3 columns of data"
-"0","data <- read.csv(""data/data-cleaned-transformed.csv"")"
-"0","head(data, 1)"

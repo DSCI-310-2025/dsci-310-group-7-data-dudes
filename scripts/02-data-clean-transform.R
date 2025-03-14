@@ -1,7 +1,16 @@
 library(dplyr)
+library(docopt)
+
+"This script cleans and saves drug use data
+
+Usage: 02-data-clean-transform.R --file_path=<file_path> --output_path=<output_path>
+" -> doc
+
+opt <- docopt(doc)
 
 # Load raw dataset
-data <- read_csv("data/raw/drug-use-by-age.csv")
+# data <- read_csv("data/raw/drug-use-by-age.csv")
+data <- read_csv(opt$file_path)
 
 # look at data
 str(data)
@@ -24,12 +33,15 @@ data_transformed <- data_clean %>%
   # Remove the 'age_numeric' column
   select(-age_numeric)
 
+# Print success message
+print("Data transformation complete!")
+
 # check data
 str(data_transformed)
 
 # Save the data
-write_csv(data_transformed, "data/clean/data-cleaned.csv")
+# write_csv(data_transformed, "data/clean/data-cleaned.csv")
+write_csv(data_transformed, opt$output_path)
 
 # Print success message
-cat("✅ Data transformation complete. ")
-cat("Transformed dataset saved to data/clean/data-cleaned.csv")
+print("Transformed dataset saved to data/clean/data-cleaned.csv")

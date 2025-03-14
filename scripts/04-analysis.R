@@ -1,16 +1,30 @@
-library(tidyverse)
-library(tidymodels)
-library(ggplot2)
-library(caret)
+"This script trains several models, generates confusion matrices, and saves the results as figures and tables.
+Usage: script.R --data=<data_file> --output_prefix=<output_prefix>
 
-output_dir <- "output"
-if (!dir.exists(output_dir)) {
-    dir.create(output_dir)
-}
+Options:
+--data=<data_file>           Path to the data file
+--output_prefix=<output_prefix>  Prefix for the output files
+" -> doc
+
+# Load necessary libraries
+library(docopt)
+library(readr)       # for read_csv
+library(dplyr)       # for select, mutate
+library(tidymodels)  # for initial_split, training, testing, workflow, etc.
+library(caret)       # for confusionMatrix
+library(ggplot2)     # for ggplot, geom_tile, geom_text, labs, ggsave
+
+
+# Parse command-line arguments
+opt <- docopt(doc)
+
+# Extract arguments
+data_file <- opt$data
+output_prefix <- opt$output_prefix
 
 # Read data
 set.seed(123)
-data <- read_csv("data/data-cleaned-transformed.csv") %>%
+data <- read_csv(data_file) %>%
     select(-n, -age) %>%
     mutate(class = as.factor(class)) # Convert class to a factor variable
 
@@ -52,17 +66,22 @@ train_and_evaluate <- function(model_spec, model_name) {
         labs(title = paste(model_name, "Confusion Matrix"), x = "Actual Class", y = "Predicted Class") +
         theme_minimal()
 
-    # Save plot
-    file_path <- file.path(output_dir, paste0("confusion-matrix_", model_name, ".png"))
-    ggsave(file_path, plot = conf_plot, width = 5, height = 4, dpi = 300)
+  # Save confusion matrix figure (PNG) with unique output names for each model
+  plot_file_path <- paste0(output_prefix, "_", model_name, "_confusion-matrix.png")
+  ggsave(plot_file_path, plot = conf_plot, width = 5, height = 4, dpi = 300)
+
+  # Save confusion matrix table (CSV) with unique output names for each model
+  table_file_path <- paste0(output_prefix, "_", model_name, "_confusion-matrix.csv")
+  write.csv(as.data.frame(conf_matrix), table_file_path)
 
 
-    list(
-        model = fit,
-        predictions = predictions,
-        confusion_matrix = conf_matrix,
-        plot_path = file_path
-    )
+  list(
+    model = fit,
+    predictions = predictions,
+    confusion_matrix = conf_matrix,
+    plot_path = plot_file_path,
+    table_path = table_file_path
+  )
 }
 
 # Define model specifications
@@ -82,7 +101,12 @@ knn_results <- train_and_evaluate(knn_spec, "knn")
 log_reg_results <- train_and_evaluate(log_reg_spec, "logistic-regression")
 tree_results <- train_and_evaluate(tree_spec, "decision-tree")
 
-# Print file paths
-print(paste("KNN Confusion Matrix saved at:", knn_results$plot_path))
-print(paste("Logistic Regression Confusion Matrix saved at:", log_reg_results$plot_path))
-print(paste("Decision Tree Confusion Matrix saved at:", tree_results$plot_path))
+# Print file paths for each output
+cat("KNN Confusion Matrix figure saved at:", knn_results$plot_path, "\n")
+cat("KNN Confusion Matrix table saved at:", knn_results$table_path, "\n")
+
+cat("Logistic Regression Confusion Matrix figure saved at:", log_reg_results$plot_path, "\n")
+cat("Logistic Regression Confusion Matrix table saved at:", log_reg_results$table_path, "\n")
+
+cat("Decision Tree Confusion Matrix figure saved at:", tree_results$plot_path, "\n")
+cat("Decision Tree Confusion Matrix table saved at:", tree_results$table_path, "\n")

@@ -1,14 +1,14 @@
 ---
-title: "DSCI 310 Project Group 7"
+title: "DSCI 310 Project: Group 7"
 author: "Jade Chen, Jessica Luo, Heidi Lantz, and Nazia Edroos"
-format: pdf
+format:
+  html:
+    embed-resources: true
 toc: true
 toc-title: Outline
 toc-location: body
 bibliography: references.bib
 ---
-
-\newpage
 
 # Predicting Age from Drug Use Patterns: A Statistical Analysis
 
@@ -125,8 +125,8 @@ We first want to take a look at the data to understand what we are dealing with.
 
 ```{r}
 #| echo: false
-# show the first 3 columns of data
-data <- read.csv("data/data-cleaned-transformed.csv")
+# show the first row of data
+data <- read.csv("data/clean/data-cleaned.csv")
 head(data, 1)
 ```
 
@@ -184,8 +184,6 @@ The insights gained from this research could inform prevention programs, helping
 This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
 
-\newpage
-
 ### Analysis
 
 First, since we are doing prediction, we did a train/test split on our data. 
@@ -209,8 +207,6 @@ Below are the confusion matrices for each model we tested:
 1. Decision Tree
 
 ![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){width=50%}
-
-\newpage
 
 2. K Nearest Neighbours (KNN)
 
@@ -285,7 +281,5 @@ This analysis raises several future questions:
 
 3. **Exploring Additional Features**  
    Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
-
-\newpage
 
 # References

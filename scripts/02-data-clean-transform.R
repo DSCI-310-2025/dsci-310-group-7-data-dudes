@@ -1,12 +1,14 @@
-library(tidyverse)
+library(dplyr)
 
 # Load raw dataset
 data <- read_csv("data/raw/drug-use-by-age.csv")
 
+# look at data
+str(data)
+
 # Convert "-" to NA for character columns, excluding 'age'
 data_clean <- data %>%
   mutate(
-    
     age = factor(age),  # Convert age to factor
     across(-age, ~ as.numeric(gsub("-", "NA", .)))  # Convert all other columns to numeric, replace "-" with NA
   )

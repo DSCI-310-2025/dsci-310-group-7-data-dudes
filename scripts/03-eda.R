@@ -13,6 +13,8 @@ args <- docopt(doc)
 
 data_c <- read_csv(args$file_path_drug)
 
+
+
 # Proportion of individuals in each age group who have consumed alcohol in the past 12 months
 plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) + 
   geom_bar(stat = "identity", width=0.7, fill="dodgerblue") + 
@@ -29,6 +31,13 @@ plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) +
     axis.text.y = element_text(size = 7))
 
 show(plot_alc)
+
+# Create output directory if it doesn't exist
+output_dir <- args$output_path
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir)
+}
+
 ggsave(file.path(args$output_path, "eda-alcohol.png"), plot=plot_alc)
 
 # Proportion of individuals in each age group who have used marijuana in the past 12 months

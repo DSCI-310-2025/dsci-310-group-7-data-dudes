@@ -13,6 +13,8 @@ opt <- docopt(doc)
 
 data <- read_csv(opt$file_path)
 
+
+
 # Proportion of individuals in each age group who have consumed alcohol in the past 12 months
 plot_alc <- ggplot(data, aes(x=age, y=`alcohol-use`)) + 
   geom_bar(stat = "identity", width=0.7, fill="dodgerblue") + 

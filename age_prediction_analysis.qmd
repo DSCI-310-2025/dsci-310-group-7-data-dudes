@@ -206,15 +206,15 @@ Below are the confusion matrices for each model we tested:
 
 1. Decision Tree
 
-![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){#fig-tree-matrix width=50%}
+![Confusion Matrix: Decision Tree](output/results/decision-tree_confusion-matrix.png){#fig-tree-matrix width=50%}
 
 2. K Nearest Neighbours (KNN)
 
-![Confusion Matrix: KNN](output/confusion-matrix_knn.png){#fig-knn-matrix width=50%}
+![Confusion Matrix: KNN](output/results/knn_confusion-matrix.png){#fig-knn-matrix width=50%}
 
 3. Logistic Regression
 
-![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png){#fig-log-matrix width=50%}
+![Confusion Matrix: Logistic Regression](output/results/logistic-regression_confusion-matrix.png){#fig-log-matrix width=50%}
 
 
 Our models struggle to correctly classify youth vs. adult due to several key issues:

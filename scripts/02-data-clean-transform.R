@@ -40,6 +40,11 @@ print("Data transformation complete!")
 # check data
 str(data_transformed)
 
+# made directory if it doesn't exist already
+if (!dir.exists(dirname(opt$output_path))) {
+  dir.create(dirname(opt$output_path), recursive = TRUE)
+}
+
 # Save the data
 # write_csv(data_transformed, "data/clean/data-cleaned.csv")
 write_csv(data_transformed, opt$output_path)

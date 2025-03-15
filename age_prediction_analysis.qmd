@@ -8,6 +8,9 @@ toc: true
 toc-title: Outline
 toc-location: body
 bibliography: references.bib
+execute:
+  echo: false
+  warning: false
 ---
 
 # Predicting Age from Drug Use Patterns: A Statistical Analysis
@@ -15,38 +18,56 @@ bibliography: references.bib
 ## Summary
 
 This study explores the relationship between drug use and age, aiming to determine whether a person's reported substance use can serve as a reliable predictor of their age.
-Using the "Drug Use by Age" dataset from FiveThirtyEight, 
+Using the @538_drug_use , 
 which compiles data from the National Survey on Drug Use and Health [@538_drug_use], 
 we employ statistical techniques to analyze the relationship between age and substance use. 
 The dataset contains information about a given age group, 
-and summary info about the percentage of people who have done a drug and the median frequency it is used at. 
+and summary info about the percentage of people who have done the given drug,
+and the median frequency it is used at. 
 There is information on a wide variety of drugs, 
 including alcohol, marijuana, various illicit drugs, and more.
 We apply predictive modeling to assess the strength of this relationship.
 
 Our findings suggest that while age-related trends in substance use are present, 
-challenges such as class imbalance and small dataset size hinder the models' ability to accurately predict age based solely on drug use. 
-Despite these challenges, the analysis highlights the potential for using substance use patterns as part of a broader predictive framework in public health and policy contexts.
+challenges such as class imbalance and small dataset size hinder the models' 
+ability to accurately predict age based solely on drug use. 
+Despite these challenges, the analysis highlights the potential 
+for using substance use patterns as part of a 
+broader predictive framework in public health and policy contexts.
 
 # Introduction
 
 ### Background and Research Question
 
-Age can greatly influence many aspects of how we behave and what decisions we make, especially regarding substance use.
-Patterns of drug consumption change over time in a person’s life, reflecting their social, biological, and environmental influences.
-Research indicates that substance use disorders, including those related to alcohol, tobacco, cannabis, and opioids, generally decrease with age [@drug_use_patterns].
-Younger individuals often engage in higher rates of substance experimentation, while older adults tend to exhibit more stable or declining usage patterns. 
-Understanding these age-related trends is essential for developing effective public health strategies, addiction prevention programs, and targeted interventions.
+Age can greatly influence many aspects of how we behave and what decisions we make,
+especially regarding substance use.
+Patterns of drug consumption change over time in a person’s life, 
+reflecting their social, biological, and environmental influences.
+Research indicates that substance use disorders, 
+including those related to alcohol, tobacco, cannabis, and opioids, 
+generally decrease with age [@drug_use_patterns].
+Younger individuals often engage in higher rates of substance experimentation, 
+while older adults tend to exhibit more stable or declining usage patterns. 
+Understanding these age-related trends is essential for 
+developing effective public health strategies, addiction prevention programs, and targeted interventions.
 
-In this study, we investigate whether a person’s reported drug use can serve as a predictor of their age [@538_drug_use]. 
+In this study, we investigate whether a person’s reported drug use
+can serve as a predictor of their age [@538_drug_use]. 
 Previous research has highlighted the progression and predictors of substance use across the lifespan. 
-For instance, studies have identified that early initiation of substance use is associated with an increased risk of developing substance use disorders later in life [@childhood_predictors]. 
-Furthermore, patterns observed during adolescence are often associated with continued use or potential abuse in adulthood [@adolescent_vs_adult_predictors].
-This tells us that finding out which age groups are using which drugs can be useful information for addressing and preventing issues like this.
-Moreover, life-course patterns of substance abuse reveal that older adults with substance misuse issues often reflect on their usage patterns, 
-providing insights into the development and persistence of these behaviors over time [@life_patterns_substance_abuse]. 
-Recognizing these patterns across different age groups can inform the creation of age-specific prevention and treatment programs.
-By assessing the strength of the relationship between age and drug use behaviors, our analysis contributes to discussions on behavioral health and its implications.
+For instance, studies have identified that early initiation of substance use
+is associated with an increased risk of developing substance use disorders later in life [@childhood_predictors]. 
+Furthermore, patterns observed during adolescence are often associated
+with continued use or potential abuse in adulthood [@adolescent_vs_adult_predictors].
+This tells us that finding out which age groups are using which drugs 
+can be useful information for addressing and preventing issues like this.
+Moreover, life-course patterns of substance abuse reveal that older adults 
+with substance misuse issues often reflect on their usage patterns, 
+providing insights into the development and persistence of these behaviors
+over time [@life_patterns_substance_abuse]. 
+Recognizing these patterns across different age groups can inform the 
+creation of age-specific prevention and treatment programs.
+By assessing the strength of the relationship between age and drug use behaviors,
+our analysis contributes to discussions on behavioral health and its implications.
 
 **This leads us to our Research Question:**
 
@@ -55,14 +76,20 @@ By assessing the strength of the relationship between age and drug use behaviors
 ### About the Data
 
 To address our research question, we utilize the "Drug Use by Age" dataset sourced 
-from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age), 
+from [FiveThirtyEight’s repository](https://github.com/rudeboybert/fivethirtyeight/tree/master/data-raw/drug-use-by-age) [@538_drug_use], 
 which is derived from 
 the [2013 National Survey on Drug Use and Health](https://doi.org/10.3886/ICPSR35509.v3).
 This study was conducted by the United States Department of Health and Human Services, 
 Substance Abuse and Mental Health Services Administration (SAMHSA), 
 Center for Behavioral Health Statistics and Quality.
 
-The dataset covers self-reported drug use trends across 17 age groups in the United States, examining 13 different substances.
+```{r}
+data <- read.csv("data/clean/data-cleaned.csv")
+```
+
+
+The dataset covers self-reported drug use trends across `{r} nrow(data)` age groups in the United States,
+examining `{r} (nrow(data) - 3)/2` different substances.
 The dataset includes both legal substances, such as alcohol and marijuana, and illicit drugs, offering a broad perspective on substance use trends for each age group.
 
 Below is a summary of the variables included in the dataset:
@@ -124,9 +151,7 @@ The following shows the most valuable plots and insights we found.
 We first want to take a look at the data to understand what we are dealing with. Let's view the first row of the data as an example:
 
 ```{r}
-#| echo: false
 # show the first row of data
-data <- read.csv("data/clean/data-cleaned.csv")
 head(data, 1)
 ```
 

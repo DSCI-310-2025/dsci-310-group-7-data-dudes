@@ -242,7 +242,8 @@ This can be seen in the (`scripts/04-analysis.R`)<https://github.com/DSCI-310-20
 ### Model Evaluation
 
 After creating the models, we want to test their ability to predict the `class` accurately. 
-We do this by creating confusion matrices, where we can see a count of which model guesses the class correctly on our test data.
+We do this by creating confusion matrices, 
+where we can see a count of which model guesses the `class` correctly on our test data.
 
 Below are the confusion matrices for each model we tested:
 
@@ -258,58 +259,86 @@ Below are the confusion matrices for each model we tested:
 
 ![Confusion Matrix: Logistic Regression](output/results/logistic-regression_confusion-matrix.png){#fig-log-matrix width=50%}
 
-
-Our models struggle to correctly classify youth vs. adult due to several key issues:
+As you can see in @fig-tree-matrix, @fig-knn-matrix, and @fig-log-matrix, our models struggle to correctly classify the youth vs. adult class. This could be due to several key issues:
 
 1. **Small Dataset Size**  
-With only 17 rows, the models lack sufficient data to learn meaningful patterns. Machine learning models, like our decision tree, typically require more data to generalize well. Additionally, there are not many points for the regression models to work off of.
+With only `{r} nrow(data)` rows, the models lack sufficient data to learn meaningful patterns. 
+Machine learning models, like our decision tree, typically require more data to generalize well. 
+Additionally, there are not many points for the regression models to work off of.
 
 2. **Class Imbalance in Age Representation**  
-The youth class consists of individual ages (e.g., 16, 17, 18), while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
-Because of this, the models struggle to differentiate youth from adults, leading to false positives (misclassifying youth as adults).
+The youth class consists of individual ages (e.g., 16, 17, 18), 
+while the adult class consists of age ranges (e.g., 22-23, 25-49, 65+).  
+Because of this, the models struggle to differentiate youth from adults, 
+leading to false positives (misclassifying youth as adults).
 
 3. **Lack of Feature Variation**  
-If the key features (not including age) don’t provide clear distinctions between youth and adult groups, the models may not have enough useful information to make accurate classifications. We do not have a wide variety of data, only information pertaining to drug use, and it is possible it may not be variable enough to accurately predict between the groups.
+If the key features (not including `age`) don’t provide clear distinctions between youth and adult groups, 
+the models may not have enough useful information to make accurate classifications. 
+We do not have a wide variety of data, only information pertaining to drug use, 
+and it is possible it may not be variable enough to accurately predict between the groups.
 
 ### Potential Solutions
 
 1. **Increase Dataset Size**  
-Collect more data to improve model performance. The Data is collected from a lot more individuals, and then aggregated to summarize between each age group. Using the original data would probably produce much better results.
+Collect more data to improve model performance. 
+The Data is collected from a lot more individuals, and then aggregated to
+summarize between each age group. 
+Using the original data would probably produce much better results.
 
 2. **Feature Engineering**  
-We could consider adding more/adjusting our features or restructuring age-related data.
+We could consider adding more and adjusting our features,
+or restructuring age-related data.
 
 3. **Resampling Techniques**  
-Use a bootstrapping or synthetic sampling (such as SMOTE) technique to balance the class representation.
+Use a bootstrapping or synthetic sampling (such as SMOTE) techniques
+to balance the class representation.
 
 
 # Discussion
 
 ### Findings
 
-Our models struggled with accurately classifying youth vs. adult due to several key issues identified in the analysis. 
+Our models struggled with accurately classifying youth vs. adult due 
+to several key issues identified in the analysis. 
+This can be seen from @fig-tree-matrix, @fig-knn-matrix, and @fig-log-matrix.
 The small dataset size likely hindered the models' ability to detect meaningful patterns. 
-Additionally, the class imbalance between individual youth ages and adult age ranges made it difficult for the models to generalize and differentiate between these groups effectively. 
+Additionally, the class imbalance between individual youth ages and adult age 
+ranges made it difficult for the models to generalize and differentiate between these groups effectively. 
 This was evident in the high rates of false positives, where youth were misclassified as adults. 
-Lastly, the lack of feature variation beyond age likely contributed to the models' poor performance, as age alone may not be sufficient to distinguish between youth and adult categories.
+Lastly, the lack of feature variation beyond age likely contributed to the models'
+poor performance, as age alone may not be sufficient to distinguish between youth and adult categories.
 
-We saw that our models were able to correctly predict the adult class, yet often made errors when predicting the youth class. 
-However, since we have such few data points, we cannot be confident that the model is accurately predictign the adult class, or if it was more just luck. 
-We need more data points not only to train our model better, but also test our model and be confident it is a good fit. 
-If we were to continue with this analysis in the future, we would likely need to find the dataset that this one aggregated the information from, that way we can build our models and understanding.
+We saw that our models were able to correctly predict the adult class, 
+yet often made errors when predicting the youth class. 
+However, since we have such few data points, we cannot be confident that the
+model is accurately predicting the adult class, or if it was more just luck. 
+We need more data points not only to train our model better, 
+but also test our model and be confident it is a good fit. 
+If we were to continue with this analysis in the future, 
+we would likely need to find the dataset that this one aggregated the information from,
+that way we can build our models and understanding.
 
 ### Does This Align with Our Expectations?
 
 Yes, these findings align with our expectations. 
-Given the small dataset and the imbalance between the youth and adult classes, we anticipated that our models would struggle with classification accuracy. 
-The confusion matrices for all three models-Decision Tree, KNN, and Logistic Regression- reflected the challenges we expected. 
-The small dataset size likely exacerbated the issue, and the class imbalance was a known factor that we hypothesized would affect performance.
+Given the small dataset and the imbalance between the youth and adult classes, 
+we anticipated that our models would struggle with classification accuracy. 
+The confusion matrices for all three models: 
+Decision Tree @fig-tree-matrix, KNN @fig-knn-matrix, and Logistic Regression @fig-log-matrix - 
+reflected the challenges we expected. 
+The small dataset size likely exacerbated the issue, 
+and the class imbalance was a known factor that we hypothesized would affect performance.
 
 ### Impact of Our Findings
 
-These findings highlight the limitations of working with small datasets, particularly when dealing with imbalanced classes. 
-In practical terms, the findings suggest that models built on such data may not be reliable for decision-making in contexts where accurate classification is crucial (e.g., youth-focused interventions or adult-targeted policies). 
-The results also emphasize the importance of addressing class imbalance and ensuring that models are trained on sufficiently large and diverse datasets. 
+These findings highlight the limitations of working with small datasets, 
+particularly when dealing with imbalanced classes. 
+In practical terms, the findings suggest that models built on such data may not be
+reliable for decision-making in contexts where accurate classification is crucial
+(e.g., youth-focused interventions or adult-targeted policies). 
+The results also emphasize the importance of addressing class imbalance and 
+ensuring that models are trained on sufficiently large and diverse datasets. 
 
 ### Future Directions
 

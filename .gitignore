@@ -12,6 +12,7 @@
 # User-specific files
 .Ruserdata
 .DS_Store
+.Rprofile
 
 # Example code in package build process
 *-Ex.R
@@ -24,6 +25,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html

@@ -104,8 +104,8 @@ Use the following steps to reproduce the analysis in a containerized environment
 
 6. **Run the analysis script**
     
-    - In the terminal, type `cd project` to set the correct working directory
-    - In the terminal, type `make all`
+    - In the RStudio terminal, type `cd project` to set the correct working directory
+    - In the RStudio terminal, type `make all`
         - Cleans any older renders of our analyss file, cleans data/ and output/ directories
         - Runs the analysis scripts
         - Renders the Quarto document

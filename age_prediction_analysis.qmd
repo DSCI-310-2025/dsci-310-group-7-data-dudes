@@ -183,7 +183,7 @@ We also applied the same approach to examine marijuana use over the same period:
 
 ![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda/eda-marijuana.png){#fig-marijuana}
 
-Both graphs reveal that these substances are commonly used during adolescence.
+Both @fig-alcohol and @fig-marijuana reveal that these substances are commonly used during adolescence.
 However, while alcohol consumption increases significantly in adulthood, 
 marijuana use tends to plateau in early adulthood.
 
@@ -196,27 +196,34 @@ For instance, we can plot the distribution of heroin use across different age gr
 ![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda/eda-heroin.png){#fig-heroin}
 
 To explore the potential relationship between the frequency of heroin use and marijuana use among individuals, we used a scatter plot of each age group's data points. 
-We also added a linear regression line to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
+We also added a linear regression line to @fig-heroin-marijuana to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
 
-![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda/eda-heroin-marijuana.png){#fig-heroin_marijuana}
+![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda/eda-heroin-marijuana.png){#fig-heroin-marijuana}
 
-Finally, let's look at some EDA that compares the two main groups we are looking at: youth and adult.
+Finally, let's look at some EDA that compares the two main groups we are looking at: `youth` and `adult`.
 
 ![Comparing Substance Use between Adults and Youth](output/eda/eda-all-use.png){#fig-sub-use}
 
-Some of these results are expected, such as the adults drinking more alcohol than the youth.
+Some of these results in @fig-sub-use are expected, such as the adults drinking more alcohol than the youth.
 
 ![Comparing Frequency Use between Adults and Youth](output/eda/eda-all-freq.png){#fig-freq-use}
 
-In general, the adults seem to use more frequently throughout the year in comparison to the youth. 
-There are some where this isn't the case, such as tranquilizer frequency, which is interesting to note.
+In general, looking at @fig-freq-use, we can see the adults seem to use more 
+frequently throughout the year in comparison to the youth. 
+There are some where this isn't the case, such as tranquilizer frequency, 
+which is interesting to note.
 
 
-The motivation behind our research stems from the significant variation in substance use distribution based on the type of substance.
-Harder substances, in particular, exhibit distinct usage patterns compared to more commonly used substances like alcohol and marijuana. 
-By analyzing these patterns, we aim to determine an individual's age group (Under 21 or 21 & Over) based only on their reported substance use history.
-The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. 
-This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
+The motivation behind our research stems from the significant variation in 
+substance use distribution based on the type of substance.
+Harder substances, in particular, exhibit distinct usage patterns compared to 
+more commonly used substances like alcohol and marijuana. 
+By analyzing these patterns, we aim to determine an individual's age group 
+(Under 21 or 21 and Over) based only on their reported substance use history.
+The insights gained from this research could inform prevention programs, 
+helping them design targeted strategies to effectively advocate against drug abuse. 
+This is especially critical for younger individuals, who are more susceptible 
+to peer pressure and may benefit from early intervention.
 
 
 ### Analysis
@@ -230,11 +237,11 @@ We chose to run three different models on our data:
 2. K-Nearest-Neighbors (KNN) Regression
 3. Logistic Regression
 
-This can be seen in the `scripts/04-analysis.R` file.
+This can be seen in the (`scripts/04-analysis.R`)<https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/04-analysis.R> file.
 
 ### Model Evaluation
 
-After creating the models, we want to test their ability to predict the youth/adult class accurately. 
+After creating the models, we want to test their ability to predict the `class` accurately. 
 We do this by creating confusion matrices, where we can see a count of which model guesses the class correctly on our test data.
 
 Below are the confusion matrices for each model we tested:

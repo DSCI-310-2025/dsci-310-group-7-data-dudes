@@ -47,6 +47,9 @@ so that when a core member reviews it they fully understand what changes you mad
 
 ## Style Guide
 
+* **Code:**
+  * Any R code should follow the (tidyverse style guide)<https://style.tidyverse.org/>
+
 * **Naming Conventions:**
   * Variable names are a balance of short and interpretable, each new word is separated by `_`. For example: `alcohol_use`.
 

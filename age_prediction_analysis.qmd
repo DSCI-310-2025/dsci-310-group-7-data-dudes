@@ -142,11 +142,11 @@ We do seem to have a few missing values, but not very many so it doesn't seem to
 Since alcohol is one of the more common drugs on this list, 
 we can begin by looking at the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
-![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda-alcohol.png){#fig-alcohol}
+![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda/eda-alcohol.png){#fig-alcohol}
 
 We also applied the same approach to examine marijuana use over the same period:
 
-![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda-marijuana.png){#fig-marijuana}
+![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda/eda-marijuana.png){#fig-marijuana}
 
 Both graphs reveal that these substances are commonly used during adolescence.
 However, while alcohol consumption increases significantly in adulthood, 
@@ -158,20 +158,20 @@ This is because the proportion of individuals using harder substances is relativ
 making median frequency a more informative metric for understanding usage patterns.
 For instance, we can plot the distribution of heroin use across different age groups:
 
-![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda-heroin.png){#fig-heroin}
+![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda/eda-heroin.png){#fig-heroin}
 
 To explore the potential relationship between the frequency of heroin use and marijuana use among individuals, we used a scatter plot of each age group's data points. 
 We also added a linear regression line to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
 
-![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda-heroin-marijuana.png){#fig-heroin_marijuana}
+![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda/eda-heroin-marijuana.png){#fig-heroin_marijuana}
 
 Finally, let's look at some EDA that compares the two main groups we are looking at: youth and adult.
 
-![Comparing Substance Use between Adults and Youth](output/eda-all-use.png){#fig-sub-use}
+![Comparing Substance Use between Adults and Youth](output/eda/eda-all-use.png){#fig-sub-use}
 
 Some of these results are expected, such as the adults drinking more alcohol than the youth.
 
-![Comparing Frequency Use between Adults and Youth](output/eda-all-freq.png){#fig-freq-use}
+![Comparing Frequency Use between Adults and Youth](output/eda/eda-all-freq.png){#fig-freq-use}
 
 In general, the adults seem to use more frequently throughout the year in comparison to the youth. 
 There are some where this isn't the case, such as tranquilizer frequency, which is interesting to note.

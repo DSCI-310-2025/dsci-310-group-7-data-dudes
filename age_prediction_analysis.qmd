@@ -1,14 +1,14 @@
 ---
-title: "DSCI 310 Project Group 7"
+title: "DSCI 310 Project: Group 7"
 author: "Jade Chen, Jessica Luo, Heidi Lantz, and Nazia Edroos"
-format: pdf
+format:
+  html:
+    embed-resources: true
 toc: true
 toc-title: Outline
 toc-location: body
 bibliography: references.bib
 ---
-
-\newpage
 
 # Predicting Age from Drug Use Patterns: A Statistical Analysis
 
@@ -125,8 +125,8 @@ We first want to take a look at the data to understand what we are dealing with.
 
 ```{r}
 #| echo: false
-# show the first 3 columns of data
-data <- read.csv("data/data-cleaned-transformed.csv")
+# show the first row of data
+data <- read.csv("data/clean/data-cleaned.csv")
 head(data, 1)
 ```
 
@@ -142,11 +142,11 @@ We do seem to have a few missing values, but not very many so it doesn't seem to
 Since alcohol is one of the more common drugs on this list, 
 we can begin by looking at the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
 
-![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda/eda-alcohol.png)
+![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda/eda-alcohol.png){#fig-alcohol}
 
 We also applied the same approach to examine marijuana use over the same period:
 
-![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda/eda-marijuana.png)
+![Proportion of individuals in each age group who have used marijuana in the past 12 months](output/eda/eda-marijuana.png){#fig-marijuana}
 
 Both graphs reveal that these substances are commonly used during adolescence.
 However, while alcohol consumption increases significantly in adulthood, 
@@ -158,20 +158,20 @@ This is because the proportion of individuals using harder substances is relativ
 making median frequency a more informative metric for understanding usage patterns.
 For instance, we can plot the distribution of heroin use across different age groups:
 
-![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda/eda-heroin.png)
+![Proportion of individuals in each age group who have used heroin in the past 12 months](output/eda/eda-heroin.png){#fig-heroin}
 
 To explore the potential relationship between the frequency of heroin use and marijuana use among individuals, we used a scatter plot of each age group's data points. 
 We also added a linear regression line to help us determine whether there is any correlation between the two variables, and therefore whether heroin use is associated with marijuana use:
 
-![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda/eda-heroin-marijuana.png)
+![Relationship between frequency of heroin use vs. frequency of marijuana use](output/eda/eda-heroin-marijuana.png){#fig-heroin_marijuana}
 
 Finally, let's look at some EDA that compares the two main groups we are looking at: youth and adult.
 
-![Comparing Substance Use between Adults and Youth](output/eda/eda-all-use.png)
+![Comparing Substance Use between Adults and Youth](output/eda/eda-all-use.png){#fig-sub-use}
 
 Some of these results are expected, such as the adults drinking more alcohol than the youth.
 
-![Comparing Frequency Use between Adults and Youth](output/eda/eda-all-freq.png)
+![Comparing Frequency Use between Adults and Youth](output/eda/eda-all-freq.png){#fig-freq-use}
 
 In general, the adults seem to use more frequently throughout the year in comparison to the youth. 
 There are some where this isn't the case, such as tranquilizer frequency, which is interesting to note.
@@ -183,8 +183,6 @@ By analyzing these patterns, we aim to determine an individual's age group (Unde
 The insights gained from this research could inform prevention programs, helping them design targeted strategies to effectively advocate against drug abuse. 
 This is especially critical for younger individuals, who are more susceptible to peer pressure and may benefit from early intervention.
 
-
-\newpage
 
 ### Analysis
 
@@ -208,17 +206,15 @@ Below are the confusion matrices for each model we tested:
 
 1. Decision Tree
 
-![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){width=50%}
-
-\newpage
+![Confusion Matrix: Decision Tree](output/confusion-matrix_decision-tree.png){#fig-tree-matrix width=50%}
 
 2. K Nearest Neighbours (KNN)
 
-![Confusion Matrix: KNN](output/confusion-matrix_knn.png){width=50%}
+![Confusion Matrix: KNN](output/confusion-matrix_knn.png){#fig-knn-matrix width=50%}
 
 3. Logistic Regression
 
-![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png){width=50%}
+![Confusion Matrix: Logistic Regression](output/confusion-matrix_logistic-regression.png){#fig-log-matrix width=50%}
 
 
 Our models struggle to correctly classify youth vs. adult due to several key issues:
@@ -285,7 +281,5 @@ This analysis raises several future questions:
 
 3. **Exploring Additional Features**  
    Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
-
-\newpage
 
 # References

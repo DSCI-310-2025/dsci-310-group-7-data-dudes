@@ -21,12 +21,15 @@ We created and ran three different models using a train/test split on our data. 
 
 Use the following steps to reproduce the analysis in a containerized environment:
 
-1. **In terminal, use the following bash command to clone this repository from GitHub to your local machine.**
+- We assume you have set up your machine
+using the [DSCI 310 Computer Setup Instructions](https://ubc-dsci.github.io/dsci-310-student/computer-setup.html)
+
+1. **In your terminal, use the following bash command to clone this repository from GitHub to your local machine.**
 
     ```bash
     git clone https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes.git
     ```
-2. **Set it this newly cloned repository as your local working directory.**
+2. **Set this newly cloned repository as your local working directory.**
 
     ```bash
     cd dsci-310-group-7-data-dudes/
@@ -75,7 +78,7 @@ Use the following steps to reproduce the analysis in a containerized environment
 
 4. **Within your local computer, set up the environment using Docker image:**
 
-    - Windows users, run the following:
+    - **Windows** users, run the following:
 
         ```bash
         docker build -t data-dudes-analysis .
@@ -85,7 +88,7 @@ Use the following steps to reproduce the analysis in a containerized environment
         docker run -it --rm -p 8787:8787 -e PASSWORD="sushi" data-dudes-analysis
         ```
 
-    - Mac users, run the following:
+    - **Mac** users, run the following:
 
         ```bash
         docker build --platform=linux/amd64 -t data-dudes-analysis .
@@ -103,14 +106,17 @@ Use the following steps to reproduce the analysis in a containerized environment
     - Navigate to the file `project` folder in the bottom right panel to view all files.
 
 6. **Run the analysis script**
-    - In the terminal, type `make all`
+    
+    - In the RStudio terminal, type `cd project` to set the correct working directory
+    - In the RStudio terminal, type `make all`, which:
         - Cleans any older renders of our analyss file, cleans data/ and output/ directories
         - Runs the analysis scripts
         - Renders the Quarto document
 
-7. **View the results by**
-    - In the terminal, type `make view`; this will open the rendered Quarto document in your browser.
-
+7. **View the results**
+    
+    - In the Files panel on the bottom right, click the newly created `index.html` file
+    - Select **View in Web Browser** to view the results
 
 ## Dependencies
 
@@ -134,7 +140,6 @@ Use the following steps to reproduce the analysis in a containerized environment
 - `rmarkdown`: 2.29
 - `tidymodels`: 1.3.0
 - `tidyr`: 1.3.1
-  - **Windows**: Use Git Bash or install Make for Windows
 
 
 ## Licenses

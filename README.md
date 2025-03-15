@@ -103,14 +103,17 @@ Use the following steps to reproduce the analysis in a containerized environment
     - Navigate to the file `project` folder in the bottom right panel to view all files.
 
 6. **Run the analysis script**
+    
+    - In the terminal, type `cd project` to set the correct working directory
     - In the terminal, type `make all`
         - Cleans any older renders of our analyss file, cleans data/ and output/ directories
         - Runs the analysis scripts
         - Renders the Quarto document
 
 7. **View the results by**
-    - In the terminal, type `make view`; this will open the rendered Quarto document in your browser.
-
+    
+    - In the Files panel on the bottom right, click the newly created `index.html` file
+    - Click **View in Web Browser** to view the results
 
 ## Dependencies
 

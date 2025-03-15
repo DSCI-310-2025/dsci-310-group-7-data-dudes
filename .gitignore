@@ -1,17 +1,19 @@
 # History files
 .Rhistory
 .Rapp.history
+.sh_history
 
 # Session Data files
 .RData
 .RDataTmp
 .cache/
 .config/
-.local/
 
 # User-specific files
 .Ruserdata
 .DS_Store
+.Rprofile
+.local/
 
 # Example code in package build process
 *-Ex.R
@@ -51,3 +53,12 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Other
+*_files/*
+
+# Once Makefile works
+# output/*
+# data/clean/*
+# *.pdf
+# *.html

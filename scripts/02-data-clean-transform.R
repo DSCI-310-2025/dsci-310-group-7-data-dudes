@@ -1,5 +1,6 @@
 library(dplyr)
 library(docopt)
+library(readr) 
 
 "This script cleans and saves drug use data
 

@@ -125,47 +125,57 @@ Below is a summary of the variables included in the dataset:
 | `sedative_use`          | Percentage who used sedatives in the past 12 months.                         |
 | `sedative_frequency`    | Median number of times sedatives were used in the past 12 months.            |
 
+: Variable Descriptions {#tbl-variables .striped .hover}
+
 # Methods and Results
 
 ### Read Data
 
-We downloaded the dataset in `01-download-dataset.R` by retrieving it from a raw GitHub URL, 
-and saving it locally in the data/raw directory. 
+We downloaded the dataset in (01-download-dataset.R)<https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/01-download-dataset.R> by retrieving it from a URL, 
+and saving it locally in the `data/raw/` directory. 
 
 ### Data Cleaning & Transformation
 
-The dataset underwent the following preprocessing steps in `02-data-clean-transform.R`:
+The dataset underwent the following preprocessing steps in
+(02-data-clean-transform.R)<https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/02-data-clean-transform.R>:
 
-1. Replaced missing values: Instances of `-` in character columns were converted to `NA` to handle missing data appropriately.
+1. **Replaced missing values**: Instances of `-` in character columns were converted to `NA` to handle missing data appropriately.
 
-2. Converted character columns to numeric: All character columns (except age) were coerced into numeric format, introducing `NA`s where conversion was not possible.
+2. **Converted character columns to numeric**: All character columns (except age) were coerced into numeric format, introducing `NA`s where conversion was not possible.
 
-3. Created a new column, `class`, to classify participants as `youth` or `adult` based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
+3. **Created a new column, `class`**: Classifies participants as `youth` or `adult` based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
 
 ### EDA
 
 Since we aim to predict age category using drug use patterns, 
-we performed some exploratory data analysis (EDA) to gain a better understanding of our dataset in `03-eda.R`. 
+we performed some exploratory data analysis (EDA) to gain a 
+better understanding of our dataset in
+(03-eda.R)<https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/03-eda.R>. 
 The following shows the most valuable plots and insights we found.
 
-We first want to take a look at the data to understand what we are dealing with. Let's view the first row of the data as an example:
+We first want to take a look at the data to understand what we are dealing with. 
+Let's view the first row of the data as an example:
 
 ```{r}
 # show the first row of data
 head(data, 1)
 ```
 
-We can also get a summary of each variable to note the ranges of data we have, and if we have any NA values present:
+If you are confused as to what the variables represent, please refer to @tbl-variables .
+
+We can also view a summary of each variable to note the ranges of data we have, 
+and if we have any `NA` values present:
 
 ```{r}
-#| echo: false
 summary(data)
 ```
 
-We do seem to have a few missing values, but not very many so it doesn't seem to be a big problem for us.
+We do have a few missing values, 
+but very little so it will not be a big problem for us.
 
-Since alcohol is one of the more common drugs on this list, 
-we can begin by looking at the proportion of individuals in each age group who have consumed alcohol in the past 12 months:
+Since alcohol is one of the more commonly used drugs on this list, 
+we can begin by looking at the proportion of individuals in each age group 
+who have consumed alcohol in the past 12 months:
 
 ![Proportion of individuals in each age group who have consumed alcohol in the past 12 months](output/eda/eda-alcohol.png){#fig-alcohol}
 

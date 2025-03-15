@@ -122,13 +122,15 @@ Use the following steps to reproduce the analysis in a containerized environment
 
 **R Dependencies**
 
-- `tidyverse`# TO DO - add version
-- `tidymodels`# TO DO - add version
-- `readr`# TO DO - add version
-- `ggplot2`# TO DO - add version
-- `dplyr`# TO DO - add version
-- `broom`# TO DO - add version
-- `rmarkdown`# TO DO - add version
+- `broom`: 1.0.7
+- `caret`: 7.0-1
+- `dplyr`: 1.1.4
+- `docopt`: 0.7.1
+- `ggplot2`: 3.5.1
+- `readr`: 2.1.5
+- `rmarkdown`: 2.29
+- `tidymodels`: 1.3.0
+- `tidyr`: 1.3.1
   - **Windows**: Use Git Bash or install Make for Windows
 
 

@@ -2,8 +2,16 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(docopt)
 
-data_c <- read_csv("data/data-cleaned.csv")
+"This script performs some exploratory data analysis on the cleaned and transformed drug use data
+
+Usage: 03-eda.R --file_path_drug=<file_path_drug> --file_path_age=<file_path_age> --output_path=<output_path>
+" -> doc
+
+args <- docopt(doc)
+
+data_c <- read_csv(args$file_path_drug)
 
 # Proportion of individuals in each age group who have consumed alcohol in the past 12 months
 plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) + 
@@ -21,7 +29,7 @@ plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) +
     axis.text.y = element_text(size = 7))
 
 show(plot_alc)
-ggsave("output/eda-alcohol.png", plot=plot_alc)
+ggsave(file.path(args$output_path, "eda-alcohol.png"), plot=plot_alc)
 
 # Proportion of individuals in each age group who have used marijuana in the past 12 months
 plot_mar <- ggplot(data_c, aes(x=age, y=`marijuana-use`)) + 
@@ -38,7 +46,7 @@ plot_mar <- ggplot(data_c, aes(x=age, y=`marijuana-use`)) +
     axis.text.y = element_text(size = 7))
 
 show(plot_mar)
-ggsave("output/eda-marijuana.png", plot=plot_mar)
+ggsave(file.path(args$output_path, "eda-marijuana.png"), plot=plot_mar)
 
 # Proportion of individuals in each age group who have used heroin in the past 12 months
 plot_her <- ggplot(data_c, aes(x = as.factor(age), y = as.numeric(`heroin-frequency`))) +
@@ -58,7 +66,7 @@ plot_her <- ggplot(data_c, aes(x = as.factor(age), y = as.numeric(`heroin-freque
     axis.text.y = element_text(size = 7)
   )
 show(plot_her)
-ggsave("output/eda-heroin.png", plot=plot_her)
+ggsave(file.path(args$output_path, "eda-heroin.png"), plot=plot_her)
 
 # Relationship between frequency of heroin use vs. frequency of marijuana use
 plot_her_mar <- data_c |>
@@ -78,11 +86,11 @@ plot_her_mar <- data_c |>
     axis.text.y = element_text(size = 7)
   )
 show(plot_her_mar)
-ggsave("output/eda-heroin-marijuana.png", plot=plot_her_mar, width=8, height=6, dpi=300)
+ggsave(file.path(args$output_path, "eda-heroin-marijuana.png"), plot=plot_her_mar, width=8, height=6, dpi=300)
 
 # now lets add some plots on comparing youth vs adult
 
-data_t <- read_csv("data/data-cleaned-transformed.csv")
+data_t <- read_csv(args$file_path_age)
 
 summary(data_t)
 
@@ -132,7 +140,7 @@ plot_all_use <- ggplot(data_use, aes(x = variable, y = value, fill = class)) +
   scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
                     labels = c("adult" = "Adult", "youth" = "Youth"))
 plot_all_use
-ggsave("output/eda-all-use.png", plot=plot_all_use, width=8, height=6, dpi=300)
+ggsave(file.path(args$output_path, "eda-all-use.png"), plot=plot_all_use, width=8, height=6, dpi=300)
 
 
 
@@ -148,4 +156,4 @@ plot_all_freq <- ggplot(data_freq, aes(x = variable, y = value, fill = class)) +
   scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
                     labels = c("adult" = "Adult", "youth" = "Youth"))
 plot_all_freq
-ggsave("output/eda-all-freq.png", plot=plot_all_freq, width=8, height=6, dpi=300)
+ggsave(file.path(args$output_path, "eda-all-freq.png"), plot=plot_all_freq, width=8, height=6, dpi=300)

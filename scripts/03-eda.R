@@ -6,17 +6,17 @@ library(docopt)
 
 "This script performs some exploratory data analysis on the cleaned and transformed drug use data
 
-Usage: 03-eda.R --file_path_drug=<file_path_drug> --file_path_age=<file_path_age> --output_path=<output_path>
+Usage: 03-eda.R --file_path=<file_path> --output_path=<output_path>
 " -> doc
 
-args <- docopt(doc)
+opt <- docopt(doc)
 
-data_c <- read_csv(args$file_path_drug)
+data <- read_csv(opt$file_path)
 
 
 
 # Proportion of individuals in each age group who have consumed alcohol in the past 12 months
-plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) + 
+plot_alc <- ggplot(data, aes(x=age, y=`alcohol-use`)) + 
   geom_bar(stat = "identity", width=0.7, fill="dodgerblue") + 
   geom_text(aes(label=`alcohol-use`), vjust=-0.3, color="grey10", size=3) +
   labs(title="Alcohol Consumption in the Past Year by Age",
@@ -33,15 +33,14 @@ plot_alc <- ggplot(data_c, aes(x=age, y=`alcohol-use`)) +
 show(plot_alc)
 
 # Create output directory if it doesn't exist
-output_dir <- args$output_path
-if (!dir.exists(output_dir)) {
-  dir.create(output_dir)
+if (!dir.exists(opt$output_path)) {
+  dir.create(opt$output_path)
 }
 
-ggsave(file.path(args$output_path, "eda-alcohol.png"), plot=plot_alc)
+ggsave(file.path(opt$output_path, "eda-alcohol.png"), plot=plot_alc)
 
 # Proportion of individuals in each age group who have used marijuana in the past 12 months
-plot_mar <- ggplot(data_c, aes(x=age, y=`marijuana-use`)) + 
+plot_mar <- ggplot(data, aes(x=age, y=`marijuana-use`)) + 
   geom_bar(stat = "identity", width=0.7, fill = "forestgreen") + 
   geom_text(aes(label=`marijuana-use`), vjust=-0.3, color="grey10", size=3) +
   labs(title="Marijuana Consumption in the Past Year by Age",
@@ -55,10 +54,10 @@ plot_mar <- ggplot(data_c, aes(x=age, y=`marijuana-use`)) +
     axis.text.y = element_text(size = 7))
 
 show(plot_mar)
-ggsave(file.path(args$output_path, "eda-marijuana.png"), plot=plot_mar)
+ggsave(file.path(opt$output_path, "eda-marijuana.png"), plot=plot_mar)
 
 # Proportion of individuals in each age group who have used heroin in the past 12 months
-plot_her <- ggplot(data_c, aes(x = as.factor(age), y = as.numeric(`heroin-frequency`))) +
+plot_her <- ggplot(data, aes(x = as.factor(age), y = as.numeric(`heroin-frequency`))) +
   geom_bar(stat = "identity", width=0.7, fill = "salmon") +
   geom_text(aes(label=`heroin-frequency`), vjust=-0.3, color="grey10", size=3) +
   labs(title="Median Heroin Use Frequency in the Past Year by Age") +
@@ -75,10 +74,10 @@ plot_her <- ggplot(data_c, aes(x = as.factor(age), y = as.numeric(`heroin-freque
     axis.text.y = element_text(size = 7)
   )
 show(plot_her)
-ggsave(file.path(args$output_path, "eda-heroin.png"), plot=plot_her)
+ggsave(file.path(opt$output_path, "eda-heroin.png"), plot=plot_her)
 
 # Relationship between frequency of heroin use vs. frequency of marijuana use
-plot_her_mar <- data_c |>
+plot_her_mar <- data |>
   ggplot(aes(x = `heroin-frequency`, y = `marijuana-frequency`, color=`age`)) +
   geom_point(alpha = 0.8) +
   geom_smooth(method = "lm", se = FALSE, color = "black", linetype = "solid") +
@@ -95,16 +94,12 @@ plot_her_mar <- data_c |>
     axis.text.y = element_text(size = 7)
   )
 show(plot_her_mar)
-ggsave(file.path(args$output_path, "eda-heroin-marijuana.png"), plot=plot_her_mar, width=8, height=6, dpi=300)
+ggsave(file.path(opt$output_path, "eda-heroin-marijuana.png"), plot=plot_her_mar, width=8, height=6, dpi=300)
 
 # now lets add some plots on comparing youth vs adult
 
-data_t <- read_csv(args$file_path_age)
-
-summary(data_t)
-
 # aggregate the data such that there are two rows to compare: youth and adult
-data_aggregated <- data_t %>%
+data_aggregated <- data %>%
     group_by(class) %>%
     summarise(across(where(is.numeric), ~ weighted.mean(.x, n, na.rm = TRUE), 
                      .names = "mean_{.col}"),
@@ -149,7 +144,7 @@ plot_all_use <- ggplot(data_use, aes(x = variable, y = value, fill = class)) +
   scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
                     labels = c("adult" = "Adult", "youth" = "Youth"))
 plot_all_use
-ggsave(file.path(args$output_path, "eda-all-use.png"), plot=plot_all_use, width=8, height=6, dpi=300)
+ggsave(file.path(opt$output_path, "eda-all-use.png"), plot=plot_all_use, width=8, height=6, dpi=300)
 
 
 
@@ -165,4 +160,4 @@ plot_all_freq <- ggplot(data_freq, aes(x = variable, y = value, fill = class)) +
   scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
                     labels = c("adult" = "Adult", "youth" = "Youth"))
 plot_all_freq
-ggsave(file.path(args$output_path, "eda-all-freq.png"), plot=plot_all_freq, width=8, height=6, dpi=300)
+ggsave(file.path(opt$output_path, "eda-all-freq.png"), plot=plot_all_freq, width=8, height=6, dpi=300)

@@ -1,9 +1,9 @@
 "This script trains several models, generates confusion matrices, and saves the results as figures and tables.
-Usage: script.R --data=<data_file> --output_prefix=<output_prefix>
+Usage: script.R --data=<data_file> --output_path=<output_path>
 
 Options:
---data=<data_file>           Path to the data file
---output_prefix=<output_prefix>  Prefix for the output files
+--data=<data_file>               Path to the data file
+--output_path=<output_path>      Path to the output directory
 " -> doc
 
 # Load necessary libraries
@@ -18,15 +18,14 @@ library(ggplot2)     # for ggplot, geom_tile, geom_text, labs, ggsave
 # Parse command-line arguments
 opt <- docopt(doc)
 
+# Create output directory if it doesn't exist
+if (!dir.exists(opt$output_path)) {
+  dir.create(opt$output_path)
+}
+
 # Extract arguments
 data_file <- opt$data
-output_prefix <- opt$output_prefix
-
-# Create output directory if it doesn't exist
-output_dir <- dirname(output_prefix)
-if (!dir.exists(output_dir)) {
-  dir.create(output_dir)
-}
+output_path <- opt$output_path
 
 # Read data
 set.seed(123)
@@ -73,19 +72,19 @@ train_and_evaluate <- function(model_spec, model_name) {
     theme_minimal()
   
   # Save plot as PNG
-  plot_file_path <- paste0(output_prefix, "_", model_name, "_confusion-matrix.png")
+  plot_file_path <- file.path(output_path, paste0(model_name, "_confusion-matrix.png"))
   ggsave(plot_file_path, plot = conf_plot, width = 5, height = 4, dpi = 300)
   
   # Save confusion matrix as CSV table
-  table_file_path <- paste0(output_prefix, "_", model_name, "_confusion-matrix.csv")
-  write.csv(conf_df, table_file_path, row.names = FALSE)
+  table_file_path <- file.path(output_path, paste0(model_name, "_confusion-matrix.csv"))
+  write.csv(as.data.frame(conf_matrix$table), table_file_path, row.names = FALSE)
   
   list(
     model = fit,
     predictions = predictions,
     confusion_matrix = conf_matrix,
-    plot_path = plot_file_path,
-    table_path = table_file_path
+    plot_path = file.path(output_path, "confusion-matrix.png"),
+    table_path = file.path(output_path, "confusion-matrix.csv")
   )
 }
 

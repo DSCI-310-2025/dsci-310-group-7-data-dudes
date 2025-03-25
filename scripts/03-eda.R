@@ -10,154 +10,112 @@ Usage: 03-eda.R --file_path=<file_path> --output_path=<output_path>
 " -> doc
 
 opt <- docopt(doc)
-
 data <- read_csv(opt$file_path)
-
-
-
-# Proportion of individuals in each age group who have consumed alcohol in the past 12 months
-plot_alc <- ggplot(data, aes(x=age, y=`alcohol-use`)) + 
-  geom_bar(stat = "identity", width=0.7, fill="dodgerblue") + 
-  geom_text(aes(label=`alcohol-use`), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Alcohol Consumption in the Past Year by Age",
-       x = "Age",
-       y = "Proportion of respondents (%)") +
-  ylim(0, 100) +
-  theme_bw() +
-  theme(axis.text = element_text(size = 8)) +
-  theme(
-    plot.title = element_text(size = 10, face = "bold"),
-    axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
-    axis.text.y = element_text(size = 7))
-
-show(plot_alc)
 
 # Create output directory if it doesn't exist
 if (!dir.exists(opt$output_path)) {
   dir.create(opt$output_path)
 }
 
-ggsave(file.path(opt$output_path, "eda-alcohol.png"), plot=plot_alc)
+# print(colnames(data))
 
-# Proportion of individuals in each age group who have used marijuana in the past 12 months
-plot_mar <- ggplot(data, aes(x=age, y=`marijuana-use`)) + 
-  geom_bar(stat = "identity", width=0.7, fill = "forestgreen") + 
-  geom_text(aes(label=`marijuana-use`), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Marijuana Consumption in the Past Year by Age",
-       x = "Age",
-       y = "Proportion of respondents (%)") +
-  ylim(0, 100) +
-  theme_bw() +
-  theme(
-    plot.title = element_text(size = 10, face = "bold"),
-    axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
-    axis.text.y = element_text(size = 7))
+create_bar_use_plot <- function(data, x_var, y_var, title, x_label, y_label, fill_color, output_file) {
+  plot <- ggplot(data, aes(x = .data[[x_var]], y = .data[[y_var]])) + 
+    geom_bar(stat = "identity", width = 0.7, fill = fill_color) + 
+    geom_text(aes(label = .data[[y_var]]), vjust = -0.3, color = "grey10", size = 3) +
+    labs(title = title, x = x_label, y = y_label) +
+    ylim(0, 100) +
+    theme_bw() +
+    theme(
+      plot.title = element_text(size = 10, face = "bold"),
+      axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+      axis.text.y = element_text(size = 7)
+    )
 
-show(plot_mar)
-ggsave(file.path(opt$output_path, "eda-marijuana.png"), plot=plot_mar)
+  ggsave(file.path(opt$output_path, output_file), plot = plot)
+  return(plot)
+}
 
-# Proportion of individuals in each age group who have used heroin in the past 12 months
-plot_her <- ggplot(data, aes(x = as.factor(age), y = as.numeric(`heroin-frequency`))) +
-  geom_bar(stat = "identity", width=0.7, fill = "salmon") +
-  geom_text(aes(label=`heroin-frequency`), vjust=-0.3, color="grey10", size=3) +
-  labs(title="Median Heroin Use Frequency in the Past Year by Age") +
-  xlab("Age") +
-  ylab("Median Frequency") +
-  scale_y_continuous(
-    breaks = seq(0, 300, by = 25),
-    labels = seq(0, 300, by = 25)
-  ) +
-  theme_bw() +
-  theme(
-    plot.title = element_text(size = 10, face = "bold"),
-    axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
-    axis.text.y = element_text(size = 7)
-  )
-show(plot_her)
-ggsave(file.path(opt$output_path, "eda-heroin.png"), plot=plot_her)
+plot_alc <- create_bar_use_plot(data, "age", "alcohol-use", "Alcohol Consumption in the Past Year by Age", "Age", "Proportion of respondents (%)", "dodgerblue", "eda-alcohol.png")
+plot_mar <- create_bar_use_plot(data, "age", "marijuana-use", "Marijuana Consumption in the Past Year by Age", "Age", "Proportion of respondents (%)", "forestgreen", "eda-marijuana.png")
 
-# Relationship between frequency of heroin use vs. frequency of marijuana use
-plot_her_mar <- data |>
-  ggplot(aes(x = `heroin-frequency`, y = `marijuana-frequency`, color=`age`)) +
-  geom_point(alpha = 0.8) +
-  geom_smooth(method = "lm", se = FALSE, color = "black", linetype = "solid") +
-  labs(title="Relationship Between Heroin and Marijuana Frequency Use", 
-       color = "Age Group",
-       y = "Marijuana Median Frequency",
-       x = "Heroin Median Frequency") +
-  scale_color_viridis_d() +
-  theme_bw() +
-  theme(
-    text = element_text(size = 12),
-    plot.title = element_text(size = 10, face = "bold"),
-    axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
-    axis.text.y = element_text(size = 7)
-  )
-show(plot_her_mar)
-ggsave(file.path(opt$output_path, "eda-heroin-marijuana.png"), plot=plot_her_mar, width=8, height=6, dpi=300)
+# Function to create and save frequency bar plots
+create_bar_freq_plot <- function(data, x_var, y_var, title, x_label, y_label, fill_color, output_file) {
+  plot <- ggplot(data, aes(x = .data[[x_var]], y = .data[[y_var]])) + 
+    geom_bar(stat = "identity", width = 0.7, fill = fill_color) + 
+    geom_text(aes(label = .data[[y_var]]), vjust = -0.3, color = "grey10", size = 3) +
+    labs(title = title, x = x_label, y = y_label) +
+    scale_y_continuous(
+      breaks = seq(0, 300, by = 25),
+      labels = seq(0, 300, by = 25)
+    ) +
+    theme_bw() +
+    theme(
+      plot.title = element_text(size = 10, face = "bold"),
+      axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+      axis.text.y = element_text(size = 7)
+    )
+  ggsave(file.path(opt$output_path, output_file), plot = plot)
+  return(plot)
+}
+
+plot_her <- create_bar_freq_plot(data, "age", "heroin-frequency", "Median Heroin Use Frequency in the Past Year by Age", "Age", "Median Frequency", "salmon", "eda-heroin.png")
+
+
+# Function for scatter plot with regression line
+create_scatter_plot <- function(data, x_var, y_var, color_var, title, x_label, y_label, output_file) {
+  plot <- ggplot(data, aes(x = .data[[x_var]], y = .data[[y_var]], color = .data[[color_var]])) +
+    geom_point(alpha = 0.8) +
+    geom_smooth(method = "lm", se = FALSE, color = "black", linetype = "solid") +
+    labs(title = title, x = x_label, y = y_label, color = "Age Group") +
+    scale_color_viridis_d() +
+    theme_bw() +
+    theme(
+      plot.title = element_text(size = 10, face = "bold"),
+      axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
+      axis.text.y = element_text(size = 7)
+    )
+  ggsave(file.path(opt$output_path, output_file), plot = plot, width = 8, height = 6, dpi = 300)
+  return(plot)
+}
+
+plot_her_mar <- create_scatter_plot(data, "heroin-frequency", "marijuana-frequency", "age", "Relationship Between Heroin and Marijuana Frequency Use", "Heroin Median Frequency", "Marijuana Median Frequency", "eda-heroin-marijuana.png")
+
 
 # now lets add some plots on comparing youth vs adult
 
-# aggregate the data such that there are two rows to compare: youth and adult
-data_aggregated <- data %>%
+# Function to generate aggregated data for youth vs. adult comparison
+aggregate_data <- function(data) {
+  data %>%
     group_by(class) %>%
     summarise(across(where(is.numeric), ~ weighted.mean(.x, n, na.rm = TRUE), 
                      .names = "mean_{.col}"),
-              total_n = sum(n)) 
-head(data_aggregated)
+              total_n = sum(n)) %>%
+    pivot_longer(cols = starts_with("mean_"), 
+                 names_to = "variable", values_to = "value") %>%
+    mutate(variable = gsub("mean_", "", variable))
+}
 
-# change the form of the data so that it is easier to plot
-data_long <- data_aggregated %>%
-  select(-mean_n) %>%
-  pivot_longer(cols = starts_with("mean_"), 
-               names_to = "variable", values_to = "value") %>%
-  mutate(variable = gsub("mean_", "", variable))
-head(data_long)
+data_long <- aggregate_data(data)
 
-# Create large plot comparing all drugs for adult and youth
-drug_class_comparison <- ggplot(data_long, aes(x = variable, y = value, fill = class)) +
-  geom_bar(stat = "identity", position = "dodge") + 
-  theme_bw() +
-  labs(title = "Comparison of Youth vs. Adult Drug Use",
-       x = "Substance Use Variable",
-       y = "Weighted Mean Value",
-       fill = "Class") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-# above is too large/busy of a plot, simplify by splitting it up
+# Function to create grouped bar plots
+create_grouped_bar_plot <- function(data, title, x_label, y_label, output_file) {
+  plot <- ggplot(data, aes(x = variable, y = value, fill = class)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    theme_bw() +
+    labs(title = title, x = x_label, y = y_label, fill = "Class") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
+                      labels = c("adult" = "Adult", "youth" = "Youth"))
+  ggsave(file.path(opt$output_path, output_file), plot = plot, width = 8, height = 6, dpi = 300)
+  return(plot)
+}
 
-# Split data into two categories: "use" and "frequency"
-data_use <- data_long %>%
-  filter(grepl(paste("use", collapse = "|"), variable))
+# Create and save youth vs. adult comparison plots
+plot_all_use <- create_grouped_bar_plot(
+  filter(data_long, grepl("use", variable)), 
+  "Youth vs. Adult: Substance Use", "Substance Type", "Mean Substance Use (%)", "eda-all-use.png")
 
-data_freq <- data_long %>%
-  filter(grepl(paste("frequency", collapse = "|"), variable))
-
-# Bar plot for substance use
-plot_all_use <- ggplot(data_use, aes(x = variable, y = value, fill = class)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  theme_bw() +
-  labs(title = "Youth vs. Adult: Substance Use",
-       x = "Substance Type",
-       y = "Mean Substance Use (%)",
-       fill = "Class") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
-                    labels = c("adult" = "Adult", "youth" = "Youth"))
-plot_all_use
-ggsave(file.path(opt$output_path, "eda-all-use.png"), plot=plot_all_use, width=8, height=6, dpi=300)
-
-
-
-# Bar plot for frequency
-plot_all_freq <- ggplot(data_freq, aes(x = variable, y = value, fill = class)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  theme_bw() +
-  labs(title = "Youth vs. Adult: Substance Use Frequency",
-       x = "Substance Type",
-       y = "Mean Frequency of Group per Year",
-       fill = "Class") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
-                    labels = c("adult" = "Adult", "youth" = "Youth"))
-plot_all_freq
-ggsave(file.path(opt$output_path, "eda-all-freq.png"), plot=plot_all_freq, width=8, height=6, dpi=300)
+plot_all_freq <- create_grouped_bar_plot(
+  filter(data_long, grepl("frequency", variable)), 
+  "Youth vs. Adult: Substance Use Frequency", "Substance Type", "Mean Frequency of Group per Year", "eda-all-freq.png")

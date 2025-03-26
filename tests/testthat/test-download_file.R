@@ -9,6 +9,7 @@ test_that("`download_data` downloads a csv file when given an URL", {
   expect_true(file.exists(test_destination))
   
   unlink("data", recursive = TRUE)  # Cleanup
+  unlink("data/test", recursive = TRUE)  # Cleanup
 })
 
 # Edge case
@@ -23,6 +24,7 @@ test_that("`download_data` handles pre-existing file", {
     expect_true(file.exists(test_destination))
 
     unlink("data", recursive = TRUE)
+    unlink("data/test", recursive = TRUE)  # Cleanup
 })
 
 # Error case

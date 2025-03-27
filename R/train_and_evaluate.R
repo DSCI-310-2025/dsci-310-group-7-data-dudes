@@ -10,8 +10,6 @@
 #' @param recipe A tidymodels recipe for preprocessing the data.  
 #' @param output_path A string specifying the directory to save results.  
 #' 
-#' @return A list containing the trained model, predictions, confusion matrix, and paths to saved figure and table.
-#' 
 #' @import tidymodels
 #' @import caret
 #' @import ggplot2
@@ -32,9 +30,6 @@ train_and_evaluate <- function(model_spec, model_name, data_train, data_test, re
   
   # Generate confusion matrix using caret
   conf_matrix <- confusionMatrix(predictions$.pred_class, predictions$class)
-  
-  # Print the confusion matrix
-  print(conf_matrix)
   
   # Convert confusion matrix to data frame for plotting
   conf_df <- as_tibble(as.table(conf_matrix)) %>%

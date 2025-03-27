@@ -36,7 +36,7 @@ create_bar_freq_plot <- function(data, x_var, y_var, title, x_label, y_label, fi
       axis.text.x = element_text(size = 7, angle = 30, hjust = 1),
       axis.text.y = element_text(size = 7)
     )
-  ggsave(file.path(opt$output_path, output_file), plot = plot)
+  ggsave(output_file, plot = plot, width = 8, height = 6)
   return(plot)
 }
 
@@ -79,6 +79,6 @@ create_grouped_bar_plot <- function(data, title, x_label, y_label, output_file) 
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     scale_fill_manual(values = c("adult" = "darkblue", "youth" = "dodgerblue"),
                       labels = c("adult" = "Adult", "youth" = "Youth"))
-  ggsave(file.path(opt$output_path, output_file), plot = plot, width = 8, height = 6, dpi = 300)
+  ggsave(output_file, plot = plot, width = 8, height = 6, dpi = 300)
   return(plot)
 }

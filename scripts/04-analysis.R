@@ -18,18 +18,16 @@ library(ggplot2)     # for ggplot, geom_tile, geom_text, labs, ggsave
 # Parse command-line arguments
 opt <- docopt(doc)
 
-# Create output directory if it doesn't exist
-if (!dir.exists(opt$output_path)) {
-  dir.create(opt$output_path)
-}
-
 # Extract arguments
 data_file <- opt$data
 output_path <- opt$output_path
 
+create_directory(output_path)
+
 # Read data
 set.seed(123)
-data <- read_csv(data_file) %>%
+
+data <- load_csv(data_file) %>%
   select(-n, -age) %>%
   mutate(class = as.factor(class)) # Convert class to a factor variable
 

@@ -26,6 +26,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -56,9 +57,3 @@ rsconnect/
 
 # Other
 *_files/*
-
-# Once Makefile works
-# output/*
-# data/clean/*
-# *.pdf
-# *.html

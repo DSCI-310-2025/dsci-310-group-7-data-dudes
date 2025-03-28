@@ -1,4 +1,6 @@
 library(testthat)
+library(dplyr)
+library(readr)
 source("R/data_cleaning.R")
 
 test_that("clean_drug_use_data correctly converts values", {

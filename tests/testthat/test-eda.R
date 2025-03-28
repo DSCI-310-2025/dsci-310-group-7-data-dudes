@@ -33,7 +33,6 @@ sample_aggregated <- tibble(
   value = c(68.6, 12.9, 25.7, 2.57, 179., 80, 20, 50, 5, 100),
 )
 
-
 # tests for bar plot for age vs. drug use
 test_that("create_bar_use_plot generates a plot object", {
   p <- create_bar_use_plot(sample_data, "age", "alcohol-use", "Alcohol Use", "Age", "Proportion", "dodgerblue", "output/eda-test/test1.png")
@@ -42,7 +41,6 @@ test_that("create_bar_use_plot generates a plot object", {
 test_that("create_bar_use_plot can handle a lower edge case; minimal dataset", {
   expect_silent(create_bar_use_plot(sample_edge_data, "age", "alcohol-use", "Alcohol Use", "Age", "Proportion", "dodgerblue", "output/eda-test/test2.png"))
 })
-
 
 # tests for bar plot for age vs. drug use frequency
 test_that("create_bar_freq_plot generates a plot object", {
@@ -53,13 +51,11 @@ test_that("create_bar_freq_plot can handle a lower edge case; minimal dataset", 
   expect_silent(create_bar_freq_plot(sample_edge_data, "age", "heroin-frequency", "Median Heroin Use Frequency in the Past Year by Age", "Age", "Median Frequency", "salmon", "output/eda-test/test4.png"))
 })
 
-
 # test whether scatter plot function for use frequency is returning a plot object
 test_that("create_scatter_plot generates a plot object", {
   p <- create_scatter_plot(sample_data, "alcohol-frequency", "heroin-frequency", "age", "Relationship Between Alcohol and Marijuana Frequency Use", "Alcohol Median Frequency", "Marijuana Median Frequency", "output/eda-test/test5.png")
   expect_s3_class(p, "ggplot")
 })
-
 
 # test that aggregating makes a valid table
 test_that("aggregate_data returns a valid tibble", {
@@ -74,7 +70,6 @@ test_that("aggregate_data correctly computes weighted means", {
   expect_true(all(result$value >= 0))  # Ensure all values are non-negative
   expect_equal(result, sample_aggregated, tolerance = 1e-2, ignore_attr = TRUE)  # Check against expected result
 })
-
 
 # test that the grouped bar plot function works
 test_that("create_grouped_bar_plot generates a plot object", {

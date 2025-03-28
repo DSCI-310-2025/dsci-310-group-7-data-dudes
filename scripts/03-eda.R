@@ -3,6 +3,7 @@ library(dplyr)
 library(tidyr)
 library(docopt)
 
+source("R/load_csv.R")
 source("R/create_directory.R")
 source("R/eda_functions.R")
 

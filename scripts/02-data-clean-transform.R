@@ -1,6 +1,8 @@
 library(dplyr)
 library(docopt)
 library(readr)
+
+source("R/load_csv.R")
 source("R/data_cleaning.R")
 
 "This script cleans and saves drug use data
@@ -12,7 +14,7 @@ opt <- docopt(doc)
 
 # Load raw dataset
 # data <- read_csv("data/raw/drug-use-by-age.csv")
-data <- read_csv(opt$file_path)
+data <- load_csv(opt$file_path)
 
 # Apply transformations
 # Convert "-" to NA for character columns, excluding 'age'

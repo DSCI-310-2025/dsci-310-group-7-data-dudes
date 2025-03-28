@@ -2,6 +2,8 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(docopt)
+
+source("R/create_directory.R")
 source("R/eda_functions.R")
 
 "This script performs some exploratory data analysis on the cleaned and transformed drug use data
@@ -10,12 +12,8 @@ Usage: 03-eda.R --file_path=<file_path> --output_path=<output_path>
 " -> doc
 
 opt <- docopt(doc)
-data <- read_csv(opt$file_path)
-
-# Create output directory if it doesn't exist
-if (!dir.exists(opt$output_path)) {
-  dir.create(opt$output_path)
-}
+data <- load_csv(opt$file_path)
+create_directory(opt$output_path)
 
 # make alcohol and marijuana use plots
 plot_alc <- create_bar_use_plot(data, "age", "alcohol-use", "Alcohol Consumption in the Past Year by Age", "Age", "Proportion of respondents (%)", "dodgerblue", file.path(opt$output_path, "eda-alcohol.png"))

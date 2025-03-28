@@ -1,6 +1,30 @@
-library(ggplot2)
-library(dplyr)
-library(tidyr)
+#' Using the cleaned data, create some exploratory data analysis plots to gain a better understanding of 
+#' the data.
+#' 
+#' @description These functions create different types of plots based on the scope of certain variables
+#' in the data. The functions include:
+#' - `create_bar_use_plot`: Creates a bar plot for substance use.
+#' - `create_bar_freq_plot`: Creates a bar plot for substance use frequency.
+#' - `create_scatter_plot`: Creates a scatter plot with a regression line.
+#' - `aggregate_data`: Aggregates data for youth vs. adult comparison.
+#' - `create_grouped_bar_plot`: Creates grouped bar plots for youth vs. adult comparison.
+#' 
+#' @param data A .csv dataframe containing data to be plotted or aggregated.
+#' @param x_var A string specifying the x-axis variable.
+#' @param y_var A string specifying the y-axis variable.
+#' @param title A string specifying the plot title.
+#' @param x_label A string specifying the x-axis label.
+#' @param y_label A string specifying the y-axis label.
+#' @param fill_color A string specifying the fill color for the bars.
+#' @param output_file A string specifying the output file path for saving the plot.
+#' @param color_var A string specifying the color variable for the scatter plot.
+#' 
+#' @return ggplot objects representing the generated plot(s).
+#' 
+#' @import ggplot2
+#' @import dplyr
+#' @import tidyr
+#' @export
 
 # Function to create bar plot for substance use
 create_bar_use_plot <- function(data, x_var, y_var, title, x_label, y_label, fill_color, output_file) {
@@ -67,12 +91,14 @@ aggregate_data <- function(data) {
               total_n = sum(n)) %>%
     pivot_longer(cols = starts_with("mean_"), 
                  names_to = "variable", values_to = "value") %>%
-    mutate(variable = gsub("mean_", "", variable))
+    mutate(variable = gsub("mean_", "", variable),
+           value = round(value, 2))
 }
+
 
 # Function to create grouped bar plots
 create_grouped_bar_plot <- function(data, title, x_label, y_label, output_file) {
-  plot <- ggplot(data, aes(x = variable, y = value, fill = class)) +
+  plot <- ggplot(data, aes(x = .data[["variable"]], y = .data[["value"]], fill = class)) +
     geom_bar(stat = "identity", position = "dodge") +
     theme_bw() +
     labs(title = title, x = x_label, y = y_label, fill = "Class") +

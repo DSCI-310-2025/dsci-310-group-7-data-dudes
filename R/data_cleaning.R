@@ -24,7 +24,7 @@ clean_drug_use_data <- function(data) {
   data %>%
     mutate(
       age = factor(age),
-      across(-age, ~ as.numeric(na_if(., "-")))
+      across(-age, ~ as.numeric(na_if(as.character(.), "-")))
     )
 }
 

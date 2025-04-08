@@ -8,11 +8,9 @@
 #'
 #' @return None. The function downloads the file as a side effect.
 download_data <- function(url, destination) {
-  create_directory(dirname(destination))
-
   # Attempt to download the file and catch errors
   tryCatch({
-    download.file(url, destination, quiet = TRUE)
+    download.file(url, file.path(destination, "drug-use-by-age.csv"), quiet = TRUE)
     message("File downloaded successfully to ", destination)
     return(TRUE)
   }, error = function(e) {

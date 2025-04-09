@@ -15,9 +15,6 @@ report:
 	quarto render age_prediction_analysis.qmd
 	mv age_prediction_analysis.html index.html
 
-view:
-	open index.html
-
 clean:
 	rm -rf output/*
 	rm -rf data/*

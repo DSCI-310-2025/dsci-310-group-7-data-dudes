@@ -24,7 +24,7 @@ In order to foster a positive and professional environment we encourage the foll
 Note: See the four social rules for further recommendations.
 
 ## Unacceptable Behavior
-Examples of unacceptable behavior by participants at any DSCI 100 event/platform include:
+Examples of unacceptable behavior by participants at any DSCI 310 event/platform include:
 - written or verbal comments which have the effect of excluding people on the basis of membership of any specific group
 - causing someone to fear for their safety, such as through stalking, following, or intimidation
 - violent threats or language directed against another person

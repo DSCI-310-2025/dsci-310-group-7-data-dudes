@@ -13,7 +13,8 @@ library(tidymodels)
 
 source("R/create_directory.R")
 source("R/load_csv.R")
-source("R/train_and_evaluate.R")
+source("R/create_confusion_matrix.R")
+source("R/train_and_predict.R")
 
 
 # Parse command-line arguments
@@ -57,7 +58,20 @@ tree_spec <- decision_tree() %>%
   set_engine("rpart") %>%
   set_mode("classification")
 
-# Train models and store results
-train_and_evaluate(knn_spec, "knn", data_train, data_test, recipe, output_path)
-train_and_evaluate(log_reg_spec, "logistic-regression", data_train, data_test, recipe, output_path)
-train_and_evaluate(tree_spec, "decision-tree", data_train, data_test, recipe, output_path)
+# Train and evaluate each model
+model_specs <- list(
+  knn = knn_spec,
+  logistic_regression = log_reg_spec,
+  decision_tree = tree_spec
+)
+
+for (model_name in names(model_specs)) {
+  model_spec <- model_specs[[model_name]]
+  
+  # Train and get predictions
+  predictions <- train_and_predict(model_spec, data_train, data_test, recipe)
+  
+  # Create confusion matrix outputs
+  conf_plot <- create_confusion_outputs(predictions, model_name, output_path)
+}
+

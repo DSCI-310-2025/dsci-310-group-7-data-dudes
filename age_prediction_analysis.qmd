@@ -129,6 +129,20 @@ Below is a summary of the variables included in the dataset:
 
 # Methods and Results
 
+### R Packages
+
+- **broom**: To tidy up model outputs for easier interpretation [@broom].  
+- **caret**: For creating machine learning models and cross-validation [@caret].  
+- **dplyr**: For data manipulation tasks like filtering and summarizing [@dplyr].  
+- **docopt**: For parsing command-line arguments [@docopt].  
+- **ggplot2**: For data visualization and creating plots [@ggplot2].  
+- **readr**: For reading data files into R [@readr].  
+- **rmarkdown**: For creating dynamic reports [@rmarkdown].  
+- **tidymodels**: For building machine learning workflows [@tidymodels].  
+- **tidyr**: For reshaping and tidying data [@tidyr].
+
+You can obtain the complete citation information for each of these packages by running `citation("package_name")` in R.
+
 ### Read Data
 
 We downloaded the dataset in (01-download-dataset.R)<https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/01-download-dataset.R> by retrieving it from a URL, 
@@ -245,7 +259,22 @@ After creating the models, we want to test their ability to predict the `class` 
 We do this by creating confusion matrices, 
 where we can see a count of which model guesses the `class` correctly on our test data.
 
-Below are the confusion matrices for each model we tested:
+### Model Evaluation
+
+After creating the models, we want to test their ability to predict the `class` accurately. 
+We do this by creating confusion matrices, 
+where we can see a count of which model guesses the `class` correctly on our test data.
+
+Below is the side-by-side comparison of confusion matrices for each model we tested:
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="output/results/decision_tree_confusion-matrix.png" alt="Confusion Matrix: Decision Tree" width="30%" />
+  <img src="output/results/knn_confusion-matrix.png" alt="Confusion Matrix: KNN" width="30%" />
+  <img src="output/results/logistic_regression_confusion-matrix.png" alt="Confusion Matrix: Logistic Regression" width="30%" />
+</div>
+
+
+Here you can see it in detail one-by-one:
 
 1. Decision Tree
 
@@ -352,5 +381,5 @@ This analysis raises several future questions:
 
 3. **Exploring Additional Features**  
    Incorporating other relevant features, such as socio-economic factors, education level, or behavioral traits, could enhance classification accuracy and provide a better understanding of the distinctions between youth and adult groups.
-
+   
 # References

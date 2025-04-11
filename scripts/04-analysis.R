@@ -8,8 +8,12 @@ Options:
 
 # Load necessary libraries
 library(docopt)
+library(parsnip)
+library(recipes)
+library(workflows)
 library(dplyr)
-library(tidymodels)
+library(rsample)
+library(readr)
 library(survey.workflow)
 
 # Parse command-line arguments
@@ -19,16 +23,12 @@ opt <- docopt(doc)
 data_file <- opt$data
 output_path <- opt$output_path
 
-#TEMP
-data_file <- "data/clean/data-cleaned.csv"
-output_path <- "output/results"
-
 create_directory(output_path)
 
 # Read data
 set.seed(123)
 
-data <- read.csv(data_file) %>%
+data <- read_csv(data_file) %>%
   select(-n, -age) %>%
   mutate(class = as.factor(class)) # Convert class to a factor variable
 
@@ -62,11 +62,10 @@ model_specs <- list(
 
 for (model_name in names(model_specs)) {
   model_spec <- model_specs[[model_name]]
-
+  
   # Train and get predictions
   predictions <- train_and_predict(model_spec, data_train, data_test, recipe)
-
+  
   # Create confusion matrix outputs
   conf_plot <- create_confusion_outputs(predictions, model_name, output_path)
 }
-

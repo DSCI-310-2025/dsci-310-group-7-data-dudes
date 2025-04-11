@@ -1,11 +1,7 @@
-library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(docopt)
-
-source("R/load_csv.R")
-source("R/create_directory.R")
-source("R/eda_functions.R")
+library(survey.workflow)
 
 "This script performs some exploratory data analysis on the cleaned and transformed drug use data
 
@@ -13,7 +9,7 @@ Usage: 03-eda.R --file_path=<file_path> --output_path=<output_path>
 " -> doc
 
 opt <- docopt(doc)
-data <- load_csv(opt$file_path)
+data <- read.csv(opt$file_path)
 create_directory(opt$output_path)
 
 # make alcohol and marijuana use plots
@@ -34,9 +30,9 @@ data_long <- aggregate_data(data)
 
 # Create and save youth vs. adult comparison plots
 plot_all_use <- create_grouped_bar_plot(
-  filter(data_long, grepl("use", variable)), 
+  filter(data_long, grepl("use", variable)),
   "Youth vs. Adult: Substance Use", "Substance Type", "Mean Substance Use (%)", file.path(opt$output_path, "eda-all-use.png"))
 
 plot_all_freq <- create_grouped_bar_plot(
-  filter(data_long, grepl("frequency", variable)), 
+  filter(data_long, grepl("frequency", variable)),
   "Youth vs. Adult: Substance Use Frequency", "Substance Type", "Mean Frequency of Group per Year", file.path(opt$output_path, "eda-all-freq.png"))

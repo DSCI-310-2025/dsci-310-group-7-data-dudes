@@ -1,4 +1,4 @@
-age,n,alcohol-use,alcohol-frequency,marijuana-use,marijuana-frequency,cocaine-use,cocaine-frequency,crack-use,crack-frequency,heroin-use,heroin-frequency,hallucinogen-use,hallucinogen-frequency,inhalant-use,inhalant-frequency,pain-releiver-use,pain-releiver-frequency,oxycontin-use,oxycontin-frequency,tranquilizer-use,tranquilizer-frequency,stimulant-use,stimulant-frequency,meth-use,meth-frequency,sedative-use,sedative-frequency,class
+age,n,alcohol.use,alcohol.frequency,marijuana.use,marijuana.frequency,cocaine.use,cocaine.frequency,crack.use,crack.frequency,heroin.use,heroin.frequency,hallucinogen.use,hallucinogen.frequency,inhalant.use,inhalant.frequency,pain.releiver.use,pain.releiver.frequency,oxycontin.use,oxycontin.frequency,tranquilizer.use,tranquilizer.frequency,stimulant.use,stimulant.frequency,meth.use,meth.frequency,sedative.use,sedative.frequency,class
 12,2798,3.9,3,1.1,4,0.1,5,0,NA,0.1,35.5,0.2,52,1.6,19,2,36,0.1,24.5,0.2,52,0.2,2,0,NA,0.2,13,youth
 13,2757,8.5,6,3.4,15,0.1,1,0,3,0,NA,0.6,6,2.5,12,2.4,14,0.1,41,0.3,25.5,0.3,4,0.1,5,0.1,19,youth
 14,2792,18.1,5,8.7,24,0.1,5.5,0,NA,0.1,2,1.6,3,2.6,5,3.9,12,0.4,4.5,0.9,5,0.8,12,0.1,24,0.2,16.5,youth

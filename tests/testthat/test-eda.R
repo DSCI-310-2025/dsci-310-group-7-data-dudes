@@ -53,7 +53,7 @@ test_that("create_bar_freq_plot can handle a lower edge case; minimal dataset", 
 
 # test whether scatter plot function for use frequency is returning a plot object
 test_that("create_scatter_plot generates a plot object", {
-  p <- create_scatter_plot(sample_data, "alcohol-frequency", "heroin-frequency", "age", "Relationship Between Alcohol and Marijuana Frequency Use", "Alcohol Median Frequency", "Marijuana Median Frequency", "output/eda-test/test5.png")
+  p <- create_scatter_plot(sample_data, "alcohol-frequency", "heroin-frequency", "age", "Relationship Between Alcohol and Heroin Frequency Use", "Alcohol Median Frequency", "Heroin Median Frequency", "output/eda-test/test5.png")
   expect_s3_class(p, "ggplot")
 })
 

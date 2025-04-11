@@ -90,7 +90,8 @@ data <- read.csv("data/clean/data-cleaned.csv")
 
 The dataset covers self-reported drug use trends across `{r} nrow(data)` age groups in the United States,
 examining `{r} (nrow(data) - 3)/2` different substances.
-The dataset includes both legal substances, such as alcohol and marijuana, and illicit drugs, offering a broad perspective on substance use trends for each age group.
+The dataset includes both legal substances, such as alcohol and marijuana, 
+and illicit drugs, offering a broad perspective on substance use trends for each age group.
 
 Below is a summary of the variables included in the dataset:
  
@@ -145,26 +146,28 @@ You can obtain the complete citation information for each of these packages by r
 
 ### Read Data
 
-We downloaded the dataset in (01-download-dataset.R)[https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/01-download-dataset.R] by retrieving it from a URL, 
+We downloaded the dataset in [01-download-dataset.R](https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/01-download-dataset.R) by retrieving it from a URL, 
 and saving it locally in the `data/raw/` directory. 
 
 ### Data Cleaning & Transformation
 
 The dataset underwent the following preprocessing steps in
-(02-data-clean-transform.R)[https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/02-data-clean-transform.R]:
+[02-data-clean-transform.R](https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/02-data-clean-transform.R):
 
 1. **Replaced missing values**: Instances of `-` in character columns were converted to `NA` to handle missing data appropriately.
 
-2. **Converted character columns to numeric**: All character columns (except age) were coerced into numeric format, introducing `NA`s where conversion was not possible.
+2. **Converted character columns to numeric**: All character columns (except age) 
+were coerced into numeric format, introducing `NA`s where conversion was not possible.
 
-3. **Created a new column, `class`**: Classifies participants as `youth` or `adult` based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
+3. **Created a new column, `class`**: Classifies participants as `youth` or `adult` 
+based on their age, where individuals aged 20 or younger were classified as `youth` and those older than 20 were classified as `adult`.
 
 ### EDA
 
 Since we aim to predict age category using drug use patterns, 
 we performed some exploratory data analysis (EDA) to gain a 
-better understanding of our dataset in
-(03-eda.R)[https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/03-eda.R]. 
+better understanding of our dataset in 
+[03-eda.R](https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/03-eda.R). 
 The following shows the most valuable plots and insights we found.
 
 We first want to take a look at the data to understand what we are dealing with. 
@@ -251,7 +254,7 @@ We chose to run three different models on our data:
 2. K-Nearest-Neighbors (KNN) Regression
 3. Logistic Regression
 
-This can be seen in the (`scripts/04-analysis.R`)[https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/04-analysis.R] file.
+This can be seen in the [`scripts/04-analysis.R`](https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes/blob/main/scripts/04-analysis.R) file.
 
 ### Model Evaluation
 

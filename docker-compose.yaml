@@ -1,0 +1,7 @@
+services:
+  analysis-env:
+    image: jadeeechen/dsci-310-group-7-data-dudes
+    ports:
+      - "8787:8787"
+    environment:
+      DISABLE_AUTH: true

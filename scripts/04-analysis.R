@@ -62,10 +62,10 @@ model_specs <- list(
 
 for (model_name in names(model_specs)) {
   model_spec <- model_specs[[model_name]]
-  
+
   # Train and get predictions
   predictions <- train_and_predict(model_spec, data_train, data_test, recipe)
-  
+
   # Create confusion matrix outputs
   conf_plot <- create_confusion_outputs(predictions, model_name, output_path)
 }

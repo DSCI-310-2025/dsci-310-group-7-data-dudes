@@ -152,16 +152,16 @@ Attribution: [DSCI310 Group 02 instructions](https://github.com/DSCI-310-2025/ds
 
 **R Dependencies**
 
-- `broom`: 1.0.7
-- `caret`: 7.0-1
-- `dplyr`: 1.1.4
+- `pkg.drugage`: 1.0.0 (Instructions to install at [DSCI-310-2025/pkg.drugage](https://github.com/DSCI-310-2025/pkg.drugage))
 - `docopt`: 0.7.1
-- `ggplot2`: 3.5.1
+- `dplyr`: 1.1.4
+- `parsnip`: 1.3.1
+- `pointblank`: 0.12.2
 - `readr`: 2.1.5
-- `rmarkdown`: 2.29
-- `tidymodels`: 1.3.0
+- `recipes`: 1.1.1
+- `rsample`: 1.2.1
 - `tidyr`: 1.3.1
-
+- `workflows`: 1.2.0
 
 ## Licenses
 

@@ -132,17 +132,16 @@ Below is a summary of the variables included in the dataset:
 
 ### R Packages
 
-- **broom**: To tidy up model outputs for easier interpretation [@broom].  
-- **caret**: For creating machine learning models and cross-validation [@caret].  
+- **pkg.drugage**: Custom package for drug age prediction models [@pkg_drugage].  
+- **pointblank**: For validating data quality and creating data validation reports [@pointblank].  
+- **parsnip**: A tidy, unified interface for specifying and fitting models [@parsnip].  
+- **recipes**: For preprocessing and feature engineering on data before modeling [@recipes].  
+- **workflows**: Combines model, preprocessing, and postprocessing into a single object [@workflows].  
+- **rsample**: For resampling datasets (e.g., cross-validation, bootstrapping) [@rsample].  
 - **dplyr**: For data manipulation tasks like filtering and summarizing [@dplyr].  
 - **docopt**: For parsing command-line arguments [@docopt].  
-- **ggplot2**: For data visualization and creating plots [@ggplot2].  
 - **readr**: For reading data files into R [@readr].  
-- **rmarkdown**: For creating dynamic reports [@rmarkdown].  
-- **tidymodels**: For building machine learning workflows [@tidymodels].  
-- **tidyr**: For reshaping and tidying data [@tidyr].
-
-You can obtain the complete citation information for each of these packages by running `citation("package_name")` in R.
+- **tidyr**: For reshaping and tidying data [@tidyr].  
 
 ### Read Data
 

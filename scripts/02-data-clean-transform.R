@@ -1,4 +1,3 @@
-# library(pkg.drugage)
 pak::pak("DSCI-310-2025/pkg.drugage")
 library(docopt)
 
@@ -56,26 +55,12 @@ integer_cols <- c(
 
 non_numeric_cols <- c("age", "class")
 
-# To check the anomalous or outlier values:
-# Function to calculate IQR thresholds
-get_iqr_bounds <- function(column_data) {
-  Q1 <- quantile(column_data, 0.25, na.rm = TRUE)
-  Q3 <- quantile(column_data, 0.75, na.rm = TRUE)
-  IQR <- Q3 - Q1
-  lower <- Q1 - 1.5 * IQR
-  upper <- Q3 + 1.5 * IQR
-  return(list(lower = lower, upper = upper))
-}
-
-# Calculate bounds for your column
-bounds <- get_iqr_bounds(data_transformed$numeric_column)
-
 # Create a data validation check
 create_agent(tbl = data_transformed, tbl_name = "drug-use-data") %>%
   # Check for correct column data types (for non-numeric columns)
   col_schema_match(
     schema = col_schema(
-      age = "factor",
+      age = "character",
       class = "character"),
     actions = warn_on_fail()
   ) %>%
@@ -94,9 +79,34 @@ create_agent(tbl = data_transformed, tbl_name = "drug-use-data") %>%
     columns = everything(),
     actions = warn_on_fail(warn_at = 0.20)
   ) %>%
-  # Check that row data is not duplicated
+  interrogate()
+
+
+# VALIDATION - Check that row data is not duplicated
+create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
   rows_distinct() %>%
-  # Check that there are no anomalous or outlier values
+  col_vals_unique(
+    columns = everything(),
+    actions = warn_on_fail()
+  ) %>%
+  interrogate()
+
+
+# VALIDATION - Check that there are no anomalous or outlier values
+# Function to calculate IQR thresholds
+get_iqr_bounds <- function(column_data) {
+  Q1 <- quantile(column_data, 0.25, na.rm = TRUE)
+  Q3 <- quantile(column_data, 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  lower <- Q1 - 1.5 * IQR
+  upper <- Q3 + 1.5 * IQR
+  return(list(lower = lower, upper = upper))
+}
+
+# Calculate bounds for your column
+bounds <- get_iqr_bounds(data_transformed$numeric_column)
+
+create_agent(tbl = data_transformed, tbl_name = "outlier-check") %>%
   col_vals_between(
     columns = "numeric_column",
     left = bounds$lower,
@@ -127,6 +137,7 @@ create_agent(tbl = data_transformed, tbl_name = "category-checks") %>%
     actions = warn_on_fail()
   ) %>%
   interrogate()
+
 
 #VALIDATION - Target/response variable follows expected distribution
 create_agent(tbl = data_transformed, tbl_name = "target_class_check") %>%

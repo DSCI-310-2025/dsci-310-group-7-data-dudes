@@ -68,7 +68,7 @@ get_iqr_bounds <- function(column_data) {
 }
 
 # Calculate bounds for your column
-bounds <- get_iqr_bounds(your_data$numeric_column)
+bounds <- get_iqr_bounds(data_transformed$numeric_column)
 
 # Create a data validation check
 create_agent(tbl = data_transformed, tbl_name = "drug-use-data") %>%

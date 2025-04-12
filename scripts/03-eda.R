@@ -1,8 +1,7 @@
 library(dplyr)
 library(tidyr)
 library(docopt)
-# library(pkg.drugage)
-pak::pak("DSCI-310-2025/pkg.drugage")
+library(pkg.drugage)
 
 "This script performs some exploratory data analysis on the cleaned and transformed drug use data
 

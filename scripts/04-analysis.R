@@ -14,8 +14,7 @@ library(workflows)
 library(dplyr)
 library(rsample)
 library(readr)
-# library(pkg.drugage)
-pak::pak("DSCI-310-2025/pkg.drugage")
+library(pkg.drugage)
 
 # Parse command-line arguments
 opt <- docopt(doc)

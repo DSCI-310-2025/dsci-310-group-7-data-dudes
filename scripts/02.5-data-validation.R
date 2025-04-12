@@ -4,7 +4,23 @@ library(dplyr)
 data_transformed <- read.csv("data/clean/data-cleaned.csv")
 str(data_transformed)
 
-# VALIDATION - Check that row data is not duplicated
+# VALIDATION - Correct data file format ------------------
+create_agent(tbl = data_transformed, tbl_name = "fileFormat-checks") %>%
+  col_is_numeric(columns = vars(
+    alcohol.use, marijuana.use, heroin.frequency, marijuana.frequency
+  )) %>%
+  col_is_character(columns = vars(age, class)) %>%
+  interrogate()
+
+# VALIDATION - Correct column names ------------------
+create_agent(tbl = data_transformed, tbl_name = "colName-checks") %>%
+  col_exists(columns = c(
+    "alcohol.use", "marijuana.use", "cocaine.use", "cocaine.frequency",
+    "heroin.use", "heroin.frequency", "marijuana.frequency"
+  )) %>%
+  interrogate()
+
+# VALIDATION - Check that row data is not duplicated ------------------
 create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
   rows_distinct() %>%
   col_vals_unique(
@@ -14,7 +30,7 @@ create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
   interrogate()
 
 
-# VALIDATION - Check that there are no anomalous or outlier values
+# VALIDATION - Check that there are no anomalous or outlier values ------------------
 # Function to calculate IQR thresholds
 get_iqr_bounds <- function(column_data) {
   Q1 <- quantile(column_data, 0.25, na.rm = TRUE)
@@ -39,7 +55,7 @@ create_agent(tbl = data_transformed, tbl_name = "outlier-check") %>%
   interrogate()
 
 
-# VALIDATION - Correct category levels (i.e., no string mismatches or single values)
+# VALIDATION - Correct category levels (i.e., no string mismatches or single values) ------------------
 valid_age_levels <- c("12", "13", "14", "15", "16", "17", "18", "19",
                       "20", "21", "22-23", "24-25", "26-29", "30-34",
                       "35-49", "50-64", "65+")
@@ -61,7 +77,7 @@ create_agent(tbl = data_transformed, tbl_name = "category-checks") %>%
   interrogate()
 
 
-#VALIDATION - Target/response variable follows expected distribution
+#VALIDATION - Target/response variable follows expected distribution ------------------
 create_agent(tbl = data_transformed, tbl_name = "target_class_check") %>%
   # Ensure class is either "youth" or "adult"
   col_vals_in_set(

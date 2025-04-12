@@ -8,6 +8,7 @@ all:
 analysis:
 	Rscript scripts/01-download-dataset.R
 	Rscript scripts/02-data-clean-transform.R --file_path=data/raw/drug-use-by-age.csv --output_path=data/clean/data-cleaned.csv
+	Rscript scripts/02.5-data-validation.R
 	Rscript scripts/03-eda.R --file_path=data/clean/data-cleaned.csv --output_path=output/eda
 	Rscript scripts/04-analysis.R --data=data/clean/data-cleaned.csv --output_path=output/results
 

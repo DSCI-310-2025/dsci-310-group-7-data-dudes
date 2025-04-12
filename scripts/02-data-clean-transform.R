@@ -1,4 +1,5 @@
 pak::pak("DSCI-310-2025/pkg.drugage")
+library(pkg.drugage)
 library(docopt)
 
 "This script cleans and saves drug use data

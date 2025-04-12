@@ -1,4 +1,3 @@
-pak::pak("DSCI-310-2025/pkg.drugage")
 library(pkg.drugage)
 library(docopt)
 

@@ -14,7 +14,6 @@ library(workflows)
 library(dplyr)
 library(rsample)
 library(readr)
-pak::pak("DSCI-310-2025/pkg.drugage")
 library(pkg.drugage)
 
 # Parse command-line arguments

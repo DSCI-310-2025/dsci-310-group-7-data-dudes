@@ -71,13 +71,6 @@ create_agent(tbl = data_transformed, tbl_name = "column-types") %>%
 
 
 # VALIDATION - Check that row data is not duplicated ---------------------------
-# create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
-#   rows_distinct() %>%
-#   col_is_unique(
-#     columns = everything(),
-#     actions = warn_on_fail()
-#   ) %>%
-#   interrogate()
 create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
   rows_distinct(actions = warn_on_fail()) %>%
   interrogate()
@@ -130,7 +123,9 @@ create_agent(tbl = data_transformed, tbl_name = "category-checks") %>%
   interrogate()
 
 
-#VALIDATION - Target/response variable follows expected distribution ------------------
+# VALIDATION - Target/response variable follows expected distribution ------------------
+library(pointblank)
+
 create_agent(tbl = data_transformed, tbl_name = "target_class_check") %>%
   # Ensure class is either "youth" or "adult"
   col_vals_in_set(
@@ -140,12 +135,12 @@ create_agent(tbl = data_transformed, tbl_name = "target_class_check") %>%
   ) %>%
   # Check youth proportion is between 45% and 55%
   col_vals_expr(
-    expr = expr(mean(.data$class == "youth") >= 0.45 & mean(.data$class == "youth") <= 0.55),
+    expr = expr(mean(class == "youth") >= 0.45 & mean(class == "youth") <= 0.55),
     actions = warn_on_fail()
   ) %>%
   # Check adult proportion is between 45% and 55%
   col_vals_expr(
-    expr = expr(mean(.data$class == "adult") >= 0.45 & mean(.data$class == "adult") <= 0.55),
+    expr = expr(mean(class == "adult") >= 0.45 & mean(class == "adult") <= 0.55),
     actions = warn_on_fail()
   ) %>%
   interrogate()

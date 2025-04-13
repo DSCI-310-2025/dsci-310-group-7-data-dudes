@@ -6,13 +6,12 @@ library(dplyr)
 library(rsample)
 library(readr)
 library(pkg.drugage)
+library(katex)
+library(kknn)
 
 "This script trains several models, generates confusion matrices, and saves the results as figures and tables.
-Usage: script.R --data=<data_file> --output_path=<output_path>
 
-Options:
---data=<data_file>               Path to the data file
---output_path=<output_path>      Path to the output directory
+Usage: script.R --data=<data_file> --output_path=<output_path>
 " -> doc
 
 # Parse command-line arguments

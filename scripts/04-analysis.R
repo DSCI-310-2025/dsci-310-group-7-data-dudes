@@ -1,12 +1,3 @@
-"This script trains several models, generates confusion matrices, and saves the results as figures and tables.
-Usage: script.R --data=<data_file> --output_path=<output_path>
-
-Options:
---data=<data_file>               Path to the data file
---output_path=<output_path>      Path to the output directory
-" -> doc
-
-# Load necessary libraries
 library(docopt)
 library(parsnip)
 library(recipes)
@@ -15,6 +6,14 @@ library(dplyr)
 library(rsample)
 library(readr)
 library(pkg.drugage)
+
+"This script trains several models, generates confusion matrices, and saves the results as figures and tables.
+Usage: script.R --data=<data_file> --output_path=<output_path>
+
+Options:
+--data=<data_file>               Path to the data file
+--output_path=<output_path>      Path to the output directory
+" -> doc
 
 # Parse command-line arguments
 opt <- docopt(doc)
@@ -25,9 +24,10 @@ output_path <- opt$output_path
 
 create_directory(output_path)
 
-# Read data
+
 set.seed(123)
 
+# Read data
 data <- read_csv(data_file) %>%
   select(-n, -age) %>%
   mutate(class = as.factor(class)) # Convert class to a factor variable

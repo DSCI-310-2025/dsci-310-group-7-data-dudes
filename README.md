@@ -127,12 +127,25 @@ using the [DSCI 310 Computer Setup Instructions](https://ubc-dsci.github.io/dsci
     ```
     - This will pull the container onto your local computer.
 
-2. Use the provided `docker-compose.yaml` file in this repository to start the container.
-    - Clone this repository by running `git clone https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes.git` in your terminal
+2. Use the provided `docker-compose.yaml` file in this repository to start the container:
+    - Clone this repository by running the following in your terminal
+        ```bash
+        git clone https://github.com/DSCI-310-2025/dsci-310-group-7-data-dudes.git
+        ```
     - In the directory containing the downloaded/pulled compose file, run `docker-compose up`
+        ```bash
+        cd dsci-310-group-7-data-dudes
+        docker-compose up
+        ```
     - Navigate to http://localhost:8787/ in your browser which will open an rstudio window in your browser, no login needed!
 
-3. Once you are in the rstudio window, run `make all`
+3. Create and view the report:
+    - Navigate to the rstudio terminal window
+    - use the following commands
+        ```
+        cd project
+        make all
+        ```
     - This will run all the scripts to clean the data, create EDA figures and tables, and create the model and visualizations
     - It will also create an index.html file in the docs folder to allow you to easily view the full report.
 

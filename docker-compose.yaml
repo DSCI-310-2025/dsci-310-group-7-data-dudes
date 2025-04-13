@@ -7,3 +7,4 @@ services:
       - .:/home/rstudio/project
     environment:
       DISABLE_AUTH: true
+    working_dir: /home/rstudio/project

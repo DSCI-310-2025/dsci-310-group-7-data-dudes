@@ -71,14 +71,16 @@ create_agent(tbl = data_transformed, tbl_name = "column-types") %>%
 
 
 # VALIDATION - Check that row data is not duplicated ---------------------------
+# create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
+#   rows_distinct() %>%
+#   col_is_unique(
+#     columns = everything(),
+#     actions = warn_on_fail()
+#   ) %>%
+#   interrogate()
 create_agent(tbl = data_transformed, tbl_name = "duplicate-check") %>%
-  rows_distinct() %>%
-  col_vals_unique(
-    columns = everything(),
-    actions = warn_on_fail()
-  ) %>%
+  rows_distinct(actions = warn_on_fail()) %>%
   interrogate()
-
 
 # VALIDATION - Check that there are no anomalous or outlier values ------------------
 # Function to calculate IQR thresholds
@@ -90,6 +92,7 @@ get_iqr_bounds <- function(column_data) {
   upper <- Q3 + 1.5 * IQR
   return(list(lower = lower, upper = upper))
 }
+
 
 # Calculate bounds for your column
 bounds <- get_iqr_bounds(data_transformed$numeric_column)
